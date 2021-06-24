@@ -8,12 +8,16 @@ const cors = require('cors')
 app.use(express.static(path.join(__dirname, "..", "public")))
 app.use(cors());
 
-
 app.listen(port, ()=>{
   console.log(`Server now listening at http://52.55.99.35:${port}`)
 })
 
+// app.listen(port, ()=>{
+//   console.log(`Server now listening at http://localhost:3004`);
+// })
+
 app.get('/reviews/:productid', function(req, res) {
+  console.log('req: ', req);
   return db.getReviews(req.params.productid)
     .then((reviews) => {
       res.send(reviews);

@@ -22,4 +22,5 @@ const Reviews = (props) => (
     </ul>
   </div>
 );
+
 export default Reviews;
