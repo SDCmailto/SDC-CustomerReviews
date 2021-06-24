@@ -1,13 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Reviews from './components/Reviews.jsx';
-import Rating from './components/Rating.jsx';
 import $ from 'jquery';
 
 class App extends React.Component {
   constructor() {
     super();
-    this.state = {productId: window.location.pathname.split("/")[1] || "1", reviews: [], score: 0};
+    this.state = {productId: window.location.pathname.split("/")[2] || "1", reviews: [], score: 0};
     this.setReviewsFeed = this.setReviewsFeed.bind(this);
   }
 
@@ -21,7 +20,7 @@ class App extends React.Component {
     let product = new URL(window.location);
     $.ajax({
       method: 'GET',
-      url: 'http://localhost:3004/reviews/' + this.state.productId,
+      url: 'http://52.55.99.35:3004/reviews/' + this.state.productId,
       success: (data, res) => {
         this.setReviewsFeed(data);
       }
@@ -37,4 +36,5 @@ class App extends React.Component {
   }
 }
 
-ReactDOM.render(<App />, document.getElementById("reviews"))
+// ReactDOM.render(<App />, document.getElementById("reviews"))
+export default App;
