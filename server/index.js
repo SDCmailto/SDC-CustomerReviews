@@ -10,10 +10,6 @@ app.listen(port, ()=>{
   console.log(`Server now listening at http://52.55.99.35:${port}`)
 })
 
-// app.listen(port, ()=>{
-//   console.log(`Server now listening at http://localhost:3004`);
-// })
-
 app.get('/reviews/:productid', function(req, res) {
   console.log('req: ', req);
   return db.getReviews(req.params.productid)
@@ -32,3 +28,4 @@ app.get('/averagereview/:productid', function(req, res) {
 app.get('/dp/:productid', function(req, res) {
   res.sendFile(path.join(__dirname, '/../public/index.html'))
 })
+

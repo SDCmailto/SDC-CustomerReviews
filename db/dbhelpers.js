@@ -2,7 +2,6 @@ const mongoose = require('mongoose');
 const faker = require('faker');
 
 const mode = process.env.NODE_ENV;
-console.log('mode: ', mode);
 
 let uri = '';
 
