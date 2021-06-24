@@ -1,30 +1,26 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Reviews from './components/Reviews.jsx';
-import Rating from './components/Rating.jsx';
 import $ from 'jquery';
 
 class App extends React.Component {
   constructor() {
     super();
-    this.state = {reviews: [], score: 0};
+    this.state = {productId: window.location.pathname.split("/")[2] || "1", reviews: [], score: 0};
     this.setReviewsFeed = this.setReviewsFeed.bind(this);
   }
 
   setReviewsFeed (data) {
-    console.log(data);
     this.setState({
       reviews: data
     })
-    console.log(this.state);
-
   }
 
   componentDidMount() {
+    let product = new URL(window.location);
     $.ajax({
       method: 'GET',
-      //currently usint a static url here, need to refactor to pull based on the url inputed...
-      url: 'http://localhost:9001/reviews/45',
+      url: 'http://52.55.99.35:3004/reviews/' + this.state.productId,
       success: (data, res) => {
         this.setReviewsFeed(data);
       }
@@ -40,4 +36,5 @@ class App extends React.Component {
   }
 }
 
-ReactDOM.render(<App />, document.getElementById("root"))
+// ReactDOM.render(<App />, document.getElementById("reviews"))
+export default App;
