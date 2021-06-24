@@ -2,11 +2,9 @@ const express = require('express')
 const app = express()
 const port = 3004
 const path = require('path')
-const db = require('../db/seed.js')
-const cors = require('cors')
 
-app.use(express.static(path.join(__dirname, "..", "public")))
-app.use(cors());
+const db = require('../db/dbhelpers')
+var cors = require('cors')
 
 app.listen(port, ()=>{
   console.log(`Server now listening at http://52.55.99.35:${port}`)
