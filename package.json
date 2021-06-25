@@ -5,10 +5,12 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "build": "webpack",
+    "build": "webpack --mode production",
     "start": "nodemon server/index.js",
+    "altStart": "webpack-dev-server --open --mode development",
     "watch": "webpack --watch",
-    "seed": "node db/seed.js"
+    "seed": "node db/seed.js",
+    "deploy": "aws s3 sync public/ s3://sdc-customer-reviews"
   },
   "repository": {
     "type": "git",
@@ -21,6 +23,7 @@
   },
   "homepage": "https://github.com/SDCmailto/SDC-CustomerReviews#readme",
   "dependencies": {
+    "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "faker": "^5.5.3",

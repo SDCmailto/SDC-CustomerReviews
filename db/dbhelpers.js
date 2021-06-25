@@ -26,3 +26,4 @@ db.once('open' , function() {
   console.log('we are connected!')
 });
 
+module.exports = {db};

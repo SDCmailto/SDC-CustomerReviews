@@ -7,8 +7,11 @@ const Reviews = (props) => (
     <ul>
       {props.reviews.slice(0,10).map((review, i) => (
         <div className = "review-container" key = {i}>
-          <div className = "review-username">
-            <img className = "review-username_image" src="https://amazoncustomerreviews.s3.us-east-2.amazonaws.com/user_image.png" ></img> <div className = "review-username_text"> {review.userName} </div>
+          <div className="username-image">
+            <img className = "review-username_image" src="https://sdc-customer-reviews.s3.us-west-1.amazonaws.com/user_image.png"></img>
+            <div className = "review-username">
+              <div className = "review-username_text"> {review.userName} </div>
+            </div>
           </div>
           <div className = "review-title">
             {review.rating} out of 5 {review.title}
@@ -24,3 +27,5 @@ const Reviews = (props) => (
 );
 
 export default Reviews;
+
+

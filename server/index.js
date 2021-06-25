@@ -1,17 +1,22 @@
 const express = require('express')
+const bodyParser = require('body-parser');
 const app = express()
 const port = 3004
 const path = require('path')
+const db = require('../db/seed')
+console.log('db: ', db)
+const cors = require('cors')
 
-const db = require('../db/dbhelpers')
-var cors = require('cors')
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, "..", "public")))
+app.use(cors());
 
 app.listen(port, ()=>{
   console.log(`Server now listening at http://52.55.99.35:${port}`)
 })
 
 app.get('/reviews/:productid', function(req, res) {
-  console.log('req: ', req);
   return db.getReviews(req.params.productid)
     .then((reviews) => {
       res.send(reviews);
