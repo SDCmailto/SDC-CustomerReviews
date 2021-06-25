@@ -27,3 +27,5 @@ coverage
 build/
 dist/
 
+# notes
+notes.js

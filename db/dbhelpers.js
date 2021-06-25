@@ -14,9 +14,7 @@ if (mode === "development" || mode === undefined) {
 console.log('connection uri: ', uri);
 
 mongoose.connect(uri, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  useCreateIndex: true,
+  useNewUrlParser: true
 });
 
 const db = mongoose.connection;
