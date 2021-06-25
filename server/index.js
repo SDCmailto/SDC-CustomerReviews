@@ -34,3 +34,24 @@ app.get('/dp/:productid', function(req, res) {
   res.sendFile(path.join(__dirname, '/../public/index.html'))
 })
 
+app.put('/writeReview/:productid', (req, res) => {
+  console.log('inside put')
+  return db.createReview(req.params.productid, (err, data) => {
+    if (err) {
+      res.status(400).send();
+    } else {
+      res.send('new review added');
+    }
+  });
+
+})
+
+app.delete('/deleteReview/:reviewId', (req, res) => {
+  return db.deleteReview(req.params.reviewId, (err, data) => {
+    if (err) {
+      res.status(400).send();
+    } else {
+      res.send(`${req.params.reviewId} deleted`);
+    }
+  });
+})

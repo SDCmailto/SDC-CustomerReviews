@@ -62,19 +62,54 @@ let seed = () => {
   }
 }
 
-let getReviews = (product) => {
+const getReviews = (product) => {
   console.log('get reviews is running');
   console.log(product);
   return Review.find({productId : product})
 }
 
-let getAverageReviews = (product) => {
+const getAverageReviews = (product) => {
   return averageReviews.findOne({productId : product})
 }
 
+const createReview = (product, cb) => {
+  let newReview = new Review({
+    productId: faker.datatype.number(100),
+    userName: faker.internet.userName(),
+    rating: faker.datatype.number(5),
+    title: faker.lorem.words(),
+    location: faker.address.country(),
+    reviewDate: faker.date.past(),
+    reviewBody: faker.lorem.paragraph(),
+    helpfulCount: faker.datatype.number(2000),
+    abuseReported: faker.datatype.boolean()
+  })
+  newReview.save(function(err, success) {
+    if (err) {
+      console.log('err: ', err);
+      cb(err)
+    } else {
+      cb()
+    }
+  })
+}
+
+const deleteReview = async (reviewid, cb) => {
+  await Review.findById(reviewid).exec()
+    .then(data => {
+      console.log('data: ', data)
+      Review.deleteOne(data).exec()
+      cb();
+    })
+    .catch((err) => {
+      cb(err);
+    });
+}
 
 seed();
 
 module.exports.getReviews = getReviews;
 module.exports.getAverageReviews = getAverageReviews;
+module.exports.createReview = createReview;
+module.exports.deleteReview = deleteReview;
 module.exports.seed = seed;

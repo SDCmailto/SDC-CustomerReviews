@@ -21,9 +21,12 @@ mongoose.connect(uri, {
 
 const db = mongoose.connection;
 
+module.exports = {db};
+
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open' , function() {
   console.log('we are connected!')
 });
 
-module.exports = {db};
+module.exports = {
+};
