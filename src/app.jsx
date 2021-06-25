@@ -29,6 +29,7 @@ class App extends React.Component {
       method: 'GET',
       url: 'reviews/' + this.state.productId,
       success: (data, res) => {
+        console.log('data: ', data)
         this.setReviewsFeed(data);
       }
     })
