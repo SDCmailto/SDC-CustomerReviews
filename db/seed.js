@@ -106,10 +106,21 @@ const deleteReview = async (reviewid, cb) => {
     });
 }
 
+const editReview = async (id, cb) => {
+  await Review.findOneAndUpdate(id).exec()
+  .then(data => {
+    cb();
+  })
+  .catch((err) => {
+    cb(err);
+  });
+}
+
 seed();
 
 module.exports.getReviews = getReviews;
 module.exports.getAverageReviews = getAverageReviews;
 module.exports.createReview = createReview;
 module.exports.deleteReview = deleteReview;
+module.exports.editReview = editReview;
 module.exports.seed = seed;

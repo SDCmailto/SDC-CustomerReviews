@@ -14,6 +14,7 @@ class App extends React.Component {
     this.setReviewsFeed = this.setReviewsFeed.bind(this);
     this.click = this.click.bind(this);
     this.delete = this.delete.bind(this);
+    this.edit = this.edit.bind(this);
   }
 
   setReviewsFeed (data) {
@@ -35,7 +36,7 @@ class App extends React.Component {
 
   click(e, id) {
     e.preventDefault();
-    axios.put('writeReview/' + this.state.productId)
+    axios.post('writeReview/' + this.state.productId)
     .then((res) => {
       console.log(res);
     })
@@ -48,6 +49,16 @@ class App extends React.Component {
     $.ajax({
       url: 'deleteReview/' + id,
       type: 'DELETE',
+      success: (data, res) => {
+        console.log('data: ', data);
+      }
+    })
+  }
+
+  edit(id) {
+    $.ajax({
+      url: 'editReview/' + id,
+      type: 'PUT',
       success: (data, res) => {
         console.log('data: ', data);
       }
@@ -68,6 +79,7 @@ class App extends React.Component {
           className="reviews-container"
           reviews={this.state.reviews}
           delete={this.delete}
+          edit={this.edit}
         />
       </div>
     )
