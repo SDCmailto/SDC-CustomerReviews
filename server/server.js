@@ -34,7 +34,7 @@ app.get('/dp/:productid', function(req, res) {
   res.sendFile(path.join(__dirname, '/../public/index.html'))
 })
 
-app.post('/writeReview/:productid', (req, res) => {
+app.post('/newReview/:productid', (req, res) => {
   console.log('inside post')
   return db.createReview(req.params.productid, (err, data) => {
     if (err) {
@@ -46,7 +46,7 @@ app.post('/writeReview/:productid', (req, res) => {
   });
 })
 
-app.put('/editReview/:reviewId', (req, res) => {
+app.put('/editedReview/:reviewId', (req, res) => {
   console.log('in edit')
   return db.editReview(req.params.reviewId, (err, data) => {
     if (err) {
@@ -59,7 +59,7 @@ app.put('/editReview/:reviewId', (req, res) => {
   });
 })
 
-app.delete('/deleteReview/:reviewId', (req, res) => {
+app.delete('/deletedReview/:reviewId', (req, res) => {
   return db.deleteReview(req.params.reviewId, (err, data) => {
     if (err) {
       res.setHeader('content-type', 'application/json');
