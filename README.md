@@ -30,7 +30,7 @@
   * reviewBody
   * helpfulCount
   * abuseReported
-GET '/averagereview/:productid'
+>GET '/averagereview/:productid'
 >Given a product id, retrieves the average review score for that product.
 POST '/newReview/:productid'
 >Given a product id, creates a new review for that product and saves it to the db.
