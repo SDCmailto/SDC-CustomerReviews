@@ -2,7 +2,6 @@ const mongoose = require('mongoose');
 const faker = require('faker');
 
 const mode = process.env.NODE_ENV;
-console.log('mode: ', mode);
 
 let uri = '';
 
@@ -15,15 +14,17 @@ if (mode === "development" || mode === undefined) {
 console.log('connection uri: ', uri);
 
 mongoose.connect(uri, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  useCreateIndex: true,
+  useNewUrlParser: true
 });
 
 const db = mongoose.connection;
+
+module.exports = {db};
 
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open' , function() {
   console.log('we are connected!')
 });
 
+module.exports = {
+};

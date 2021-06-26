@@ -1,34 +1,16 @@
-const express = require('express')
-const app = express()
-const port = 3004
-const path = require('path')
+const app = require("./server.js");
 
-const db = require('../db/dbhelpers')
-var cors = require('cors')
+const PORT = 3004;
+let mode = process.env.NODE_ENV;
 
-app.listen(port, ()=>{
-  console.log(`Server now listening at http://52.55.99.35:${port}`)
-})
+let url = '';
 
-// app.listen(port, ()=>{
-//   console.log(`Server now listening at http://localhost:3004`);
-// })
+// if (mode === 'development' || mode === undefined) {
+//   url += config.development.booking;
+// } else if (mode === 'production') {
+//   url += config.production.booking;
+// }
 
-app.get('/reviews/:productid', function(req, res) {
-  console.log('req: ', req);
-  return db.getReviews(req.params.productid)
-    .then((reviews) => {
-      res.send(reviews);
-    })
-})
-
-app.get('/averagereview/:productid', function(req, res) {
-  return db.getAverageReviews(req.params.productid)
-    .then((score) => {
-      res.send(score);
-    })
-})
-
-app.get('/dp/:productid', function(req, res) {
-  res.sendFile(path.join(__dirname, '/../public/index.html'))
+app.listen(PORT, ()=>{
+  console.log(`Server now listening at http://52.55.99.35:${PORT}`)
 })

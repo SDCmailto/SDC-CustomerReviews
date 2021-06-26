@@ -1,3 +1,13 @@
+/* .customer-reviews {
+
+} */
+.write-review {
+
+}
+
+#write-review-btn {
+
+}
 .review-title {
   font-size: 14px!important;
   line-height: 20px!important;
@@ -6,11 +16,14 @@
   font-family: "Amazon Ember",Arial,sans-serif;
 }
 
+.username-image {
+  display: flex;
+}
+
 .review-username {
   font-size: 13px;
   line-height: 19px;
   position: relative;
-
 }
 
 .review-username_image {
@@ -18,7 +31,6 @@
 }
 
 .review-username_text {
-
   display: inline-block;
   position: absolute;
   top:12px

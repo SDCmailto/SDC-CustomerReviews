@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-  entry: './src/index.jsx',
+  entry: './src/Index.jsx',
   mode: 'development',
   output: {
     filename: 'customerreviews.js',
