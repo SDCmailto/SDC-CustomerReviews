@@ -16,7 +16,31 @@
 
 ## Usage
 
-> Some usage instructions
+> This service contains
+
+>1.1 API Endpoints
+>GET '/reviews/:productid'
+>Given a product id, retrieves all reviews for that product. Each review has this shape:
+  * productId
+  * userName
+  * rating
+  * title
+  * location
+  * reviewDate
+  * reviewBody
+  * helpfulCount
+  * abuseReported
+>GET '/averagereview/:productid'
+>Given a product id,
+>GET '/dp/:productid'
+>Given a product id,
+>POST '/newReview/:productid'
+>Given a product id,
+>PUT '/editedReview/:reviewId'
+>Given a product id, 
+>DELETE '/deletedReview/:reviewId'
+>Given a product id, 
+
 
 ## Requirements
 
