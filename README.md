@@ -31,15 +31,13 @@
   * helpfulCount
   * abuseReported
 >GET '/averagereview/:productid'
->Given a product id,
->GET '/dp/:productid'
->Given a product id,
+>Given a product id, retrieves the average review score for that product.
 >POST '/newReview/:productid'
->Given a product id,
+>Given a product id, creates a new review for that product and saves it to the db.
 >PUT '/editedReview/:reviewId'
->Given a product id, 
+>Given a review id, looks up and updates that review in the db.
 >DELETE '/deletedReview/:reviewId'
->Given a product id, 
+>Given a review id, removes that review from the db.
 
 
 ## Requirements
