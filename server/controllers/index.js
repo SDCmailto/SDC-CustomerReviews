@@ -4,11 +4,25 @@ const models = require('../models');
 module.exports = {
   postgres: {
     get: {
-      reviews: () => {
-        console.log('inside postgres.get.reviews')
-      }
-      averageRating: () => {
-        console.log('inside postgres.get.averageRating')
+      reviews: {
+        method: "GET",
+        path: "/reviews/:productid",
+        handler: () => {
+          console.log('inside postgres.get.reviews')
+        },
+        config: {
+          description: "Gets all the reviews available for a given product Id"
+        }
+      },
+      averageRating: {
+        method: "GET",
+        path: "/averagerating/:productid",
+        handler: () => {
+          console.log('inside postgres.get.averagerating')
+        },
+        config: {
+          description: "Gets the average rating for a given product Id"
+        }
       }
     },
     post: () => {
