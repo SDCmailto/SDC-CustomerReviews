@@ -1,8 +1,11 @@
 const express = require('express')
 const bodyParser = require('body-parser');
 const path = require('path')
-const db = require('../database/mongo/seed')
+
+//switch between dbs based on env vars???
+// const db = require('../database/mongo/seed')
 const db = require('../database/postgres/seed')
+
 const cors = require('cors')
 
 const app = express()
@@ -13,6 +16,7 @@ app.use(express.json())
 app.use(express.static(path.join(__dirname, "..", "public")))
 app.use(cors());
 
+//how do i route all requests through controllers?
 app.get('/reviews/:productid', function(req, res) {
   return db.getReviews(req.params.productid)
     .then((reviews) => {

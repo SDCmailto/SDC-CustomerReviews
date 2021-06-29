@@ -11,7 +11,7 @@ CREATE TABLE Users (
   id BIGSERIAL,
   name VARCHAR(50),
   userRating INTEGER,
-  totalReviews INTEGER,
+  totalReviews INTEGER
 );
 ALTER TABLE Users ADD CONSTRAINT Users_pkey PRIMARY KEY (id);
 CREATE TABLE Features (
