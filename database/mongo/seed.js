@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const db = require('./dbhelpers.js');
+const db = require('./mongoose.js');
 const faker = require('faker');
 
 const reviewsSchema = new mongoose.Schema({
@@ -14,13 +14,13 @@ const reviewsSchema = new mongoose.Schema({
   abuseReported: Boolean
 })
 
-const averageReviewsSchema = new mongoose.Schema({
+const averageRatingSchema = new mongoose.Schema({
   productId: String,
   totalReviews: Number,
-  averageReviews: Number
+  averageRating: Number
 })
 
-const averageReviews = mongoose.model('AverageReviews', averageReviewsSchema);
+const averageRating= mongoose.model('AverageRating', averageRatingSchema);
 const Review = mongoose.model('Review', reviewsSchema);
 
 let seed = () => {
@@ -44,16 +44,16 @@ let seed = () => {
   }
 
   for (let i =1; i <= 100; i++) {
-    let newAverageReview = new averageReviews({
+    let newAverageRating = new averageRating({
       productId: i,
       totalReviews: faker.datatype.number(3000),
-      averageReviews: faker.datatype.number({
+      averageRating: faker.datatype.number({
         'min': 1,
         'max': 5,
         precision: .1
     }),
     })
-    newAverageReview.save(function(err, success){
+    newAverageRating.save(function(err, success){
       if (err) {
         console.log('error saving to the database')
       }
@@ -68,8 +68,8 @@ const getReviews = (product) => {
   return Review.find({productId : product})
 }
 
-const getAverageReviews = (product) => {
-  return averageReviews.findOne({productId : product})
+const getAverageRating = (product) => {
+  return averageRating.findOne({productId : product})
 }
 
 const createReview = (product, cb) => {
@@ -119,7 +119,7 @@ const editReview = async (id, cb) => {
 seed();
 
 module.exports.getReviews = getReviews;
-module.exports.getAverageReviews = getAverageReviews;
+module.exports.getAverageRating = getAverageRating;
 module.exports.createReview = createReview;
 module.exports.deleteReview = deleteReview;
 module.exports.editReview = editReview;
