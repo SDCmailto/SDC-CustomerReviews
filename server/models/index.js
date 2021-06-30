@@ -1,4 +1,3 @@
-//actually touches my db
 const controllers = require('../controllers')
 
 module.exports = {
@@ -7,13 +6,13 @@ module.exports = {
     reviews: {},
     users: {},
     features: {}
-  }
+  },
   neo4j: {
     products: {},
     reviews: {},
     users: {},
     features: {}
-  }
+  },
   mongo: {
     getReviews: () => {
       console.log('inside mongo getReviews')

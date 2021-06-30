@@ -1,4 +1,3 @@
-//pass data between models and client
 const models = require('../models/index.js');
 
 module.exports = {
@@ -9,7 +8,6 @@ module.exports = {
         path: "/reviews/:productid",
         handler: () => {
           console.log('inside postgres.get.reviews')
-          //invoke model
         },
         config: {
           description: "Gets all the reviews available for a given product Id"
@@ -59,12 +57,13 @@ module.exports = {
       config: {
         description: "Deletes a review for given product Id and user Id"
       }
-    },
+    }
+  },
   neo4j: {
     get: {
       reviews: () => {
         console.log('inside neo4j.get.reviews')
-      }
+      },
       averageRating: () => {
         console.log('inside neo4j.get.averageRating')
       }
@@ -81,26 +80,26 @@ module.exports = {
   },
   mongo: {
     get: {
-      reviews: ('/reviews/:productid', (req, res) => {
+      reviews: (req, res) => {
         console.log('inside mongo.get.reviews')
         return models.mongo.getReviews()
       },
-      averageRating: ('/averagerating/:productid', (req, res) => {
+      averageRating: (req, res) => {
         console.log('inside mongo.get.averageRating')
         return models.mongo.getAvgRating()
       }
     },
-    post: ('/newReview/:productid', (req, res) => {
+    post: (req, res) => {
       console.log('inside mongo.post')
       return models.mongo.createReview()
     },
-    put: () => {
+    put: (req, res) => {
       console.log('inside mongo.put')
-      return models.mongo.avgRating()
+      return models.mongo.updateReview()
     },
-    delete: () => {
+    delete: (req, res) => {
       console.log('inside mongo.delete')
-      return models.mongo.avgRating()
+      return models.mongo.deleteReview()
     }
   }
 }
