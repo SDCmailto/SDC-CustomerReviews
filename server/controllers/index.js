@@ -4,8 +4,6 @@ module.exports = {
   postgres: {
     get: {
       reviews: {
-        method: "GET",
-        path: "/reviews/:productid",
         handler: () => {
           console.log('inside postgres.get.reviews')
         },
@@ -14,8 +12,6 @@ module.exports = {
         }
       },
       averageRating: {
-        method: "GET",
-        path: "/averagerating/:productid",
         handler: () => {
           console.log('inside postgres.get.averagerating')
           //invoke model
@@ -26,8 +22,6 @@ module.exports = {
       }
     },
     post: {
-      method: "POST",
-      path: "/newReview/:productid",
       handler: () => {
         console.log('inside postgres.post')
         //invoke model
@@ -37,8 +31,6 @@ module.exports = {
       }
     },
     put: {
-      method: "PUT",
-      path: "/editedReview/:reviewId",
       handler: () => {
       console.log('inside postgres.put')
       //invoke model
@@ -48,8 +40,6 @@ module.exports = {
       }
     },
     delete: {
-      method: "DELETE",
-      path: "/deletedReview/:reviewId",
       handler: () => {
       console.log('inside postgres.delete')
       //invoke model
