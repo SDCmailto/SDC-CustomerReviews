@@ -1,18 +1,20 @@
-const { Client } = require('pg')
-const config = require('../../config.js')
+const { Pool, Client } = require('pg')
 
-const client = new Client({
-  host: 'localhost',
-  port: 5432,
-  user: 'hannahmanfredi',
-  password: config.postgres.password,
-})
+const pool = new Pool()
+const connectPool = async () => {
+const res = await pool.query('SELECT NOW()')
+await pool.end()
+}
 
-const db = await client.connect()
+connectPool();
 
-const res = await client.query('SELECT $1::text as message', ['Hello world!'])
-console.log(res.rows[0].message) // Hello world!
+const client = new Client()
+const connection = async () => {
+  await client.connect(() => {
+    console.log('Postgres connected')
+  })
+  const res = await client.query('SELECT NOW()')
+  await client.end()
+}
 
-// await client.end()
-
-module.exports = {db};
+connection()

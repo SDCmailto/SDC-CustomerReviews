@@ -16,6 +16,9 @@ app.use(express.json())
 app.use(express.static(path.join(__dirname, "..", "public")))
 app.use(cors());
 
+let usr = process.env.USER
+console.log('usr: ', usr)
+
 //how do i route all requests through controllers?
 app.get('/reviews/:productid', function(req, res) {
   return db.getReviews(req.params.productid)
