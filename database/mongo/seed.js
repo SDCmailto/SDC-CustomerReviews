@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const db = require('./index.js');
+const mongoDb = require('./index.js');
 const faker = require('faker');
 
 const reviewsSchema = new mongoose.Schema({

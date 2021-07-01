@@ -19,9 +19,6 @@ app.use(cors());
 
 app.use(router);
 
-let usr = process.env.USER
-console.log('usr: ', usr)
-
 // app.get('/reviews/:productid', function(req, res) {
 //   return db.getReviews(req.params.productid)
 //     .then((reviews) => {

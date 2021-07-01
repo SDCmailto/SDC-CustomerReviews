@@ -18,11 +18,11 @@ mongoose.connect(uri, {
   useUnifiedTopology: true
 });
 
-const db = mongoose.connection;
+const mongoDb = mongoose.connection;
 
-module.exports = {db};
+module.exports = {mongoDb};
 
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open' , function() {
+mongoDb.on('error', console.error.bind(console, 'connection error:'));
+mongoDb.once('open' , function() {
   console.log('we are connected!')
 });
