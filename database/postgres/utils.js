@@ -68,5 +68,22 @@ module.exports = {
       users.push(user)
     }
     return products
+  },
+  createProductFeatures: () => {
+    let productFeatures = [];
+    for (let j = 0; j < 1000000; j++) {
+      let range = []
+      for (let i = 0; i < 4; i++) {
+      let random = Math.floor(Math.random() * (25 - 0 + 1) + 0)
+      range.push(random)
+      }
+      let productFeature = {
+        id: j,
+        productid: j,
+        featureid: range
+      }
+      productFeatures.push(productFeature)
+    }
+    return productFeatures
   }
 };
