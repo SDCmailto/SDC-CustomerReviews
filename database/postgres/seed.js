@@ -27,6 +27,7 @@ const insertFromCsv = () => {
                   csvData.forEach((row) => {
                       client.query(query, row, (err, res) => {
                           if (err) {
+                              console.log(err);
                               console.log(err.stack);
                           } else {
                               console.log('inserted ' + res.rowCount + ' row:', row);
@@ -42,8 +43,8 @@ const insertFromCsv = () => {
 }
 
 const seed = async () => {
-  console.log('inside seed')
   let stream = fs.createReadStream('./products.csv');
+  //create readStream for each table/csv
   stream.pipe(insertFromCsv());
 }
 
