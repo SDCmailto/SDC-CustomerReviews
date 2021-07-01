@@ -4,8 +4,16 @@ module.exports = {
   postgres: {
     get: {
       reviews: {
-        handler: () => {
+        handler: (req, res) => {
           console.log('inside postgres.get.reviews')
+          //get productId from req
+          models.postgres.reviews.findAllReviews(productId, (err, data) => {
+            if (err) {
+              res.status(201).send('error retrieving reviews')
+            } else {
+              res.status(200).send(JSON.stringify(data))
+            }
+          })
         },
         config: {
           description: "Gets all the reviews available for a given product Id"
@@ -14,7 +22,8 @@ module.exports = {
       averageRating: {
         handler: () => {
           console.log('inside postgres.get.averagerating')
-          //invoke model
+          //get productId from req
+          models.postgres.reviews.findAvgRating(productId)
         },
         config: {
           description: "Gets the average rating for a given product Id"

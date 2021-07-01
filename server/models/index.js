@@ -1,9 +1,42 @@
 const controllers = require('../controllers')
+const mongo = require('../../database/mongo/index.js')
+const postgres = require('../../database/postgres/index.js')
 
 module.exports = {
   postgres: {
     products: {},
-    reviews: {},
+    reviews: {
+      findAllReviews: (productId, cb) => {
+        const query = {
+          text: 'SELECT * FROM reviews WHERE id = $1'
+          // values = [productId],
+        };
+        postgres.query(query, (err, res) => {
+          if (err) {
+            console.log(err.stack)
+            cb(err)
+          } else {
+            console.log(res)
+            cb(res)
+          }
+        })
+      },
+      findAvgRating: (productId) => {
+        const query = {
+          text: 'SELECT avgRating FROM products WHERE id = $1'
+          // values: [productId]
+        };
+        postgres.query(query, (err, res) => {
+          if (err) {
+            console.log(err.stack)
+            cb(err)
+          } else {
+            console.log(res)
+            cb(res)
+          }
+        })
+      }
+    },
     users: {},
     features: {}
   },

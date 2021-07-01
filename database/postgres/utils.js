@@ -28,24 +28,20 @@ module.exports = {
   },
   createReviews: () => {
     let reviews = [];
-    for (let i = 0; i < 10000000; i++) {
-      let count = 0
-      while (count < 1000) {
-        let review = {
-          id: i,
-          title: faker.lorem.words(),
-          abuseReported: faker.datatype.boolean(),
-          rating: faker.datatype.number(5),
-          location: faker.address.country(),
-          userId: i,
-          productId: i,
-          reviewDate: faker.date.past(),
-          reviewBody: faker.lorem.paragraph(),
-          helpfulCount: faker.datatype.number(2000),
-        }
-        reviews.push(review)
-        count ++
+    for (let i = 0; i < 1000000; i++) {
+      let review = {
+        id: i,
+        title: faker.lorem.words(),
+        abuseReported: faker.datatype.boolean(),
+        rating: faker.datatype.number(5),
+        location_: faker.address.country(),
+        userId: i,
+        productId: i,
+        reviewDate: faker.date.past(),
+        reviewBody: faker.lorem.paragraph(),
+        helpfulCount: faker.datatype.number(2000),
       }
+      reviews.push(review)
     }
     return reviews
   },
@@ -57,17 +53,17 @@ module.exports = {
     for (let i = 0; i < 1000000; i++) {
       let user = {
         id: i,
-        name: faker.person.first_name() + '()' + faker.person.last_name(),
-        userrating: faker.datatype.number({
+        name_: faker.name.findName(),
+        userrating: Math.floor(faker.datatype.number({
           'min': 1,
           'max': 15000,
           precision: .1
-        }),
+        })),
         totalreviews: faker.datatype.number(10000)
       }
       users.push(user)
     }
-    return products
+    return users
   },
   createProductFeatures: () => {
     let productFeatures = [];
