@@ -1,3 +1,6 @@
+## general config ##
+config.js
+
 ## aws files ##
 aws.config.js
 
