@@ -29,6 +29,7 @@ module.exports = {
   createReviews: () => {
     let reviews = [];
     for (let i = 0; i < 1000000; i++) {
+      let date = JSON.stringify(faker.date.past()).slice(1, 11)
       let review = {
         id: i,
         title: faker.lorem.words(),
@@ -37,7 +38,7 @@ module.exports = {
         location_: faker.address.country(),
         userId: i,
         productId: i,
-        reviewDate: faker.date.past(),
+        reviewDate: date,
         reviewBody: faker.lorem.paragraph(),
         helpfulCount: faker.datatype.number(2000),
       }

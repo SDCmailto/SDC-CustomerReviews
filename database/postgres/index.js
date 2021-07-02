@@ -11,21 +11,19 @@ const pool = new Pool({
 
 pool.connect()
 
-// pool.query(`COPY users FROM '../../users.csv' WITH (FORMAT csv)`, (err, res) => {
+// pool.query(`COPY users(id, name_, userrating, totalreviews) FROM '/Users/hannahmanfredi/Desktop/SDC/SDC-CustomerReviews/users.csv' CSV HEADER`, (err, res) => {
 //     console.log(err, res)
 // })
 
-// pool.query(`COPY products FROM '../../products.csv' WITH (FORMAT csv)`, (err, res) => {
+// pool.query(`COPY products(id, avgRating, totalReviews, totalRatings) FROM '/Users/hannahmanfredi/Desktop/SDC/SDC-CustomerReviews/products.csv' CSV HEADER`, (err, res) => {
 //     console.log(err, res)
 // })
 
-// const reviews = ['../../reviews.csv', '../../reviews1.csv', '../../reviews2.csv', '../../reviews3.csv', '../../reviews.csv4', '../../reviews.csv5', '../../reviews.csv6', '../../reviews.csv7', '../../reviews.csv8', '../../reviews.csv9', '../../reviews.csv10']
+// const reviews = ['/Users/hannahmanfredi/Desktop/SDC/SDC-CustomerReviews/reviews.csv', '/Users/hannahmanfredi/Desktop/SDC/SDC-CustomerReviews/reviews1.csv', '/Users/hannahmanfredi/Desktop/SDC/SDC-CustomerReviews/reviews2.csv', '/Users/hannahmanfredi/Desktop/SDC/SDC-CustomerReviews/reviews3.csv', '/Users/hannahmanfredi/Desktop/SDC/SDC-CustomerReviews/reviews4.csv', '/Users/hannahmanfredi/Desktop/SDC/SDC-CustomerReviews/reviews5.csv', '/Users/hannahmanfredi/Desktop/SDC/SDC-CustomerReviews/reviews6.csv', '/Users/hannahmanfredi/Desktop/SDC/SDC-CustomerReviews/reviews7.csv', '/Users/hannahmanfredi/Desktop/SDC/SDC-CustomerReviews/reviews8.csv', '/Users/hannahmanfredi/Desktop/SDC/SDC-CustomerReviews/reviews9.csv']
 
-// reviews.forEach((reviewCsv, i) => {
-//     pool.query(`COPY reviews FROM ${reviews[i]} WITH (FORMAT csv)`, (err, res) => {
-//         console.log(err, res)
-//     })
-// })
+// for (let file of reviews) {
+//     pool.query(`COPY reviews(id, title, abuseReported, rating, location_, userId, productId, reviewDate, reviewBody, helpfulCount) FROM PROGRAM 'awk reviews*.csv | cat' DELIMITER ',' CSV HEADER;`)
+// }
 
 module.exports = {
     query: (text, params, callback) => {
