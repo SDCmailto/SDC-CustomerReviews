@@ -5,17 +5,21 @@ const pool = require('./index');
 const contains = require('validator/lib/contains');
 
 const copyCsv = (table, file) => {
-    console.log('in insertFromCsv')
+    console.log('in copyCsv')
     console.log('table: ', table)
     console.log('file: ', file)
     let csvData = [];
     let query = ''
-    if (table === 'product') {
+    if (table === 'products') {
         query += `COPY products(id, avgRating, totalReviews, totalRatings) FROM '/Users/hannahmanfredi/Desktop/SDC/SDC-CustomerReviews/products.csv' CSV HEADER`;
-    } else if (table === 'review') {
-        query += `COPY reviews(id, title, abuseReported, rating, location_, userId, productId, reviewDate, reviewBody, helpfulCount) FROM PROGRAM 'awk reviews*.csv | cat' DELIMITER ',' CSV HEADER;`
-    } else if (table === 'user') {
+    } else if (table === 'reviews') {
+        query += `COPY reviews(id, title, abuseReported, rating, location_, userId, productId, reviewDate, reviewBody, helpfulCount) FROM '/Users/hannahmanfredi/Desktop/SDC/SDC-CustomerReviews/reviews.csv' CSV HEADER`;
+    } else if (table === 'users') {
         query += `COPY users(id, name_, userrating, totalreviews) FROM '/Users/hannahmanfredi/Desktop/SDC/SDC-CustomerReviews/users.csv' CSV HEADER`;
+    } else if (table === 'features') {
+        query += `COPY features(id, name_) FROM '/Users/hannahmanfredi/Desktop/SDC/SDC-CustomerReviews/features.csv' CSV HEADER`;
+    } else if (table === 'productFeatures') {
+        query += `COPY productfeatures(id, productid, featureid) FROM '/Users/hannahmanfredi/Desktop/SDC/SDC-CustomerReviews/productFeatures.csv' CSV HEADER`;
     }
     return (
       fastcsv
@@ -49,68 +53,19 @@ const copyCsv = (table, file) => {
     );
   }
 
-const insertFromCsv = (table, file) => {
-  let csvData = [];
-    console.log('in insertFromCsv')
-    console.log('table: ', table)
-    console.log('file: ', file)
-  let query = ''
-    if (table === 'product') {
-        query += 'INSERT INTO products (id, avgRating, totalReviews, totalRatings) VALUES ($1, $2, $3, $4)';
-    } else if (table === 'review') {
-        query += 'INSERT INTO reviews (id, title, abuseReported, rating, location_, userId, productId, reviewDate, reviewBody, helpfulCount) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)';
-    } else if (table === 'user') {
-        query += 'INSERT INTO users (id, name_, userrating, totalreviews) VALUES ($1, $2, $3, $4)';
-    }
-  return (
-    fastcsv
-      .parse()
-      .validate((data) => !contains(data[0], ','))
-      .on('data', (data) => {
-          csvData.push(data);
-      })
-      .on('data-invalid', (row, rowNumber) =>
-          console.log(
-              `Invalid [rowNumber=${rowNumber}] [row=${JSON.stringify(row)}]`
-          )
-      )
-      .on('end', () => {
-          pool.connect((err, client, done) => {
-              if (err) throw err;
-              try {
-                  csvData.forEach((row) => {
-                      pool.query(query, row, (err, res) => {
-                          if (err) {
-                              console.log(err);
-                              console.log(err.stack);
-                          } else {
-                              console.log('inserted ' + res.rowCount + ' row:', row);
-                          }
-                      });
-                  });
-              } finally {
-                  done();
-              }
-          });
-      })
-  );
-}
-
 const seed = async () => {
-//   let productStream = fs.createReadStream('./products.csv');
-//   let usersStream = fs.createReadStream('./users.csv');
-//   await productStream.pipe(insertFromCsv('product'));
-//   await usersStream.pipe(insertFromCsv('user'));
-  const reviews = ['/Users/hannahmanfredi/Desktop/SDC/SDC-CustomerReviews/reviews.csv', '/Users/hannahmanfredi/Desktop/SDC/SDC-CustomerReviews/reviews1.csv', '/Users/hannahmanfredi/Desktop/SDC/SDC-CustomerReviews/reviews2.csv', '/Users/hannahmanfredi/Desktop/SDC/SDC-CustomerReviews/reviews3.csv', '/Users/hannahmanfredi/Desktop/SDC/SDC-CustomerReviews/reviews4.csv', '/Users/hannahmanfredi/Desktop/SDC/SDC-CustomerReviews/reviews5.csv', '/Users/hannahmanfredi/Desktop/SDC/SDC-CustomerReviews/reviews6.csv', '/Users/hannahmanfredi/Desktop/SDC/SDC-CustomerReviews/reviews7.csv', '/Users/hannahmanfredi/Desktop/SDC/SDC-CustomerReviews/reviews8.csv', '/Users/hannahmanfredi/Desktop/SDC/SDC-CustomerReviews/reviews9.csv'];
-  for await (let file of reviews) {
-    let reviewsStream = fs.createReadStream('/Users/hannahmanfredi/Desktop/SDC/SDC-CustomerReviews/reviews2.csv');
-    reviewsStream.pipe(insertFromCsv());
-    // reviewsStream.pipe(copyCsv('review', file));
-//   }
+  let reviewsStream = fs.createReadStream('/Users/hannahmanfredi/Desktop/SDC/SDC-CustomerReviews/reviews.csv');
+  await reviewsStream.pipe(copyCsv('reviews'));
+  let productStream = fs.createReadStream('/Users/hannahmanfredi/Desktop/SDC/SDC-CustomerReviews/products.csv');
+  await productStream.pipe(copyCsv('products'));
+  let usersStream = fs.createReadStream('/Users/hannahmanfredi/Desktop/SDC/SDC-CustomerReviews/users.csv');
+  await usersStream.pipe(copyCsv('users'));
+  let featuresStream = fs.createReadStream('/Users/hannahmanfredi/Desktop/SDC/SDC-CustomerReviews/features.csv');
+  await featuresStream.pipe(copyCsv('features'));
+  let productFeaturesStream = fs.createReadStream('/Users/hannahmanfredi/Desktop/SDC/SDC-CustomerReviews/productFeatures.csv');
+  await productFeaturesStream.pipe(copyCsv('productFeatures'));
 }
 
 seed()
 
 module.exports.seed = seed;
-
-
