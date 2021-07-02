@@ -1,3 +1,10 @@
+## CSV files ##
+reviews.CSV
+users.CSV
+products.CSV
+features.CSV
+productFeatures.CSV
+
 ## general config ##
 config.js
 
