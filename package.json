@@ -13,7 +13,6 @@
     "build": "webpack --mode production",
     "create-db": "psql postgres < schema.sql",
     "seed": "./database/postgres/seed.js",
-    "newSeed": "./database/postgres/seed.js",
     "writeToCsv": "node ./database/postgres/csv.js",
     "start": "nodemon server/index.js",
     "altStart": "webpack-dev-server --open --mode development",

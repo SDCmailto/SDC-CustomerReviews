@@ -54,16 +54,16 @@ const copyCsv = (table, file) => {
   }
 
 const seed = async () => {
-  let reviewsStream = fs.createReadStream('/Users/hannahmanfredi/Desktop/SDC/SDC-CustomerReviews/reviews.csv');
-  await reviewsStream.pipe(copyCsv('reviews'));
+//   let reviewsStream = fs.createReadStream('/Users/hannahmanfredi/Desktop/SDC/SDC-CustomerReviews/reviews.csv');
+//   await reviewsStream.pipe(copyCsv('reviews'));
   let productStream = fs.createReadStream('/Users/hannahmanfredi/Desktop/SDC/SDC-CustomerReviews/products.csv');
   await productStream.pipe(copyCsv('products'));
-  let usersStream = fs.createReadStream('/Users/hannahmanfredi/Desktop/SDC/SDC-CustomerReviews/users.csv');
-  await usersStream.pipe(copyCsv('users'));
-  let featuresStream = fs.createReadStream('/Users/hannahmanfredi/Desktop/SDC/SDC-CustomerReviews/features.csv');
-  await featuresStream.pipe(copyCsv('features'));
-  let productFeaturesStream = fs.createReadStream('/Users/hannahmanfredi/Desktop/SDC/SDC-CustomerReviews/productFeatures.csv');
-  await productFeaturesStream.pipe(copyCsv('productFeatures'));
+//   let usersStream = fs.createReadStream('/Users/hannahmanfredi/Desktop/SDC/SDC-CustomerReviews/users.csv');
+//   await usersStream.pipe(copyCsv('users'));
+//   let featuresStream = fs.createReadStream('/Users/hannahmanfredi/Desktop/SDC/SDC-CustomerReviews/features.csv');
+//   await featuresStream.pipe(copyCsv('features'));
+//   let productFeaturesStream = fs.createReadStream('/Users/hannahmanfredi/Desktop/SDC/SDC-CustomerReviews/productFeatures.csv');
+//   await productFeaturesStream.pipe(copyCsv('productFeatures'));
 }
 
 seed()

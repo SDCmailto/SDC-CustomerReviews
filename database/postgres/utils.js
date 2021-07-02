@@ -4,11 +4,11 @@ module.exports = {
   createProducts: () => {
     let products = [];
     const min = 100
-    for (let i = 0; i < 20000000; i++) {
+    for (let i = 0; i < 20; i++) {
       let totalReviews = faker.datatype.number(3000)
       let random = Math.floor(Math.random() * (totalReviews - min + 1) + min)
       let product = {
-        id: i,
+        product_id: i,
         avgRating: faker.datatype.number({
           'min': 1,
           'max': 5,
@@ -41,7 +41,7 @@ module.exports = {
         }
         let date = JSON.stringify(faker.date.past()).slice(1, 11)
         let review = {
-          id: i,
+          review_id: i,
           title: faker.lorem.words(),
           abuseReported: faker.datatype.boolean(),
           rating: faker.datatype.number(5),
@@ -70,7 +70,7 @@ module.exports = {
     let names = ['Value for money', 'Blending power', 'Mobile App', 'Easy to use', 'Freshness','Comfort', 'Light weight', 'Easy to spread', 'Fingerprint reader', 'Airtight storage', 'Scent', 'For traveling', 'Sturdiness', 'Zoom', 'Flavor', 'Easy to clean', 'Durability', 'Easy to hold', 'Portability', 'Picture quality', 'Quality of material', 'Sheerness', 'Easy to clean', 'Maneuverability', 'Adhesion'];
     for (let i = 0; i < names.length; i++) {
       let feature = {
-        id: i,
+        feature_id: i,
         name_: names[i]
       }
       features.push(feature)
@@ -81,7 +81,7 @@ module.exports = {
     let users = [];
     for (let i = 0; i < 1000000; i++) {
       let user = {
-        id: i,
+        userid: i,
         name_: faker.name.findName(),
         userrating: Math.floor(faker.datatype.number({
           'min': 1,
@@ -104,7 +104,7 @@ module.exports = {
       }
       let csvRange = range.join(',')
       let productFeature = {
-        id: j,
+        productFeature_id: j,
         productid: j,
         featureid: csvRange
       }
@@ -129,7 +129,7 @@ module.exports = {
           newCount += 1000;
         }
         let productFeature = {
-          id: count,
+          productFeature_id: count,
           productid: id,
           featureid: range[random]
         }
