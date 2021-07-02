@@ -102,7 +102,7 @@ const seed = async () => {
 //   await productStream.pipe(insertFromCsv('product'));
 //   await usersStream.pipe(insertFromCsv('user'));
   const reviews = ['/Users/hannahmanfredi/Desktop/SDC/SDC-CustomerReviews/reviews.csv', '/Users/hannahmanfredi/Desktop/SDC/SDC-CustomerReviews/reviews1.csv', '/Users/hannahmanfredi/Desktop/SDC/SDC-CustomerReviews/reviews2.csv', '/Users/hannahmanfredi/Desktop/SDC/SDC-CustomerReviews/reviews3.csv', '/Users/hannahmanfredi/Desktop/SDC/SDC-CustomerReviews/reviews4.csv', '/Users/hannahmanfredi/Desktop/SDC/SDC-CustomerReviews/reviews5.csv', '/Users/hannahmanfredi/Desktop/SDC/SDC-CustomerReviews/reviews6.csv', '/Users/hannahmanfredi/Desktop/SDC/SDC-CustomerReviews/reviews7.csv', '/Users/hannahmanfredi/Desktop/SDC/SDC-CustomerReviews/reviews8.csv', '/Users/hannahmanfredi/Desktop/SDC/SDC-CustomerReviews/reviews9.csv'];
-//   for await (let file of reviews) {
+  for await (let file of reviews) {
     let reviewsStream = fs.createReadStream('/Users/hannahmanfredi/Desktop/SDC/SDC-CustomerReviews/reviews2.csv');
     reviewsStream.pipe(insertFromCsv());
     // reviewsStream.pipe(copyCsv('review', file));

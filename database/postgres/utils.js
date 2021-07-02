@@ -9,7 +9,7 @@ module.exports = {
   createProducts: () => {
     let products = [];
     const min = 100
-    for (let i = 0; i < 1000000; i++) {
+    for (let i = 0; i < 20000000; i++) {
       let totalReviews = faker.datatype.number(3000)
       let random = Math.floor(Math.random() * (totalReviews - min + 1) + min)
       let product = {
@@ -26,25 +26,45 @@ module.exports = {
     }
     return products
   },
-  createReviews: () => {
-    let reviews = [];
-    for (let i = 0; i < 1000000; i++) {
-      let date = JSON.stringify(faker.date.past()).slice(1, 11)
-      let review = {
-        id: i,
-        title: faker.lorem.words(),
-        abuseReported: faker.datatype.boolean(),
-        rating: faker.datatype.number(5),
-        location_: faker.address.country(),
-        userId: i,
-        productId: i,
-        reviewDate: date,
-        reviewBody: faker.lorem.paragraph(),
-        helpfulCount: faker.datatype.number(2000),
+  createReviews: (writer, encoding, cb) => {
+    let i = 10000000;
+    let id = 0;
+    let count = 0;
+    let newCount = 0;
+    function write() {
+      let ok = true;
+      do {
+        i -= 1;
+        count += 1;
+        if (newCount === (count + 1000)) {
+          id += 1;
+          newCount += 1000;
+        }
+        let date = JSON.stringify(faker.date.past()).slice(1, 11)
+        let review = {
+          id: id,
+          title: faker.lorem.words(),
+          abuseReported: faker.datatype.boolean(),
+          rating: faker.datatype.number(5),
+          location_: faker.address.country(),
+          userId: i,
+          productId: i,
+          reviewDate: date,
+          reviewBody: faker.lorem.paragraph(),
+          helpfulCount: faker.datatype.number(2000),
+        }
+        const data = `${review.id},${review.title},${review.abuseReported},${review.rating},${review.location_},${review.userId},${review.productId},${review.reviewDate},${review.reviewBody},${review.helpfulCount}\n`;
+        if (i === 0) {
+          writer.write(data, encoding, cb);
+        } else {
+          ok = writer.write(data, encoding);
+        }
+      } while (i > 0 && ok);
+      if (i > 0) {
+        writer.once('drain', write);
       }
-      reviews.push(review)
     }
-    return reviews
+    write()
   },
   createFeatures: () => {
     let features = ['Value for money', 'Blending power', 'Mobile App',  'Easy to use', 'Freshness', 'Comfort', 'Light weight', 'Easy to spread', 'Fingerprint reader', 'Airtight storage', 'Scent', 'For traveling', 'Sturdiness', 'Zoom', 'Flavor', 'Easy to clean', 'Durability', 'Easy to hold', 'Portability', 'Picture quality', 'Quality of material', 'Sheerness', 'Easy to clean', 'Maneuverability', 'Adhesion' ]
