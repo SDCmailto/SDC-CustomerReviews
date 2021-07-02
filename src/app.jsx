@@ -37,7 +37,7 @@ class App extends React.Component {
 
   click(e, id) {
     e.preventDefault();
-    axios.post('writeReview/' + this.state.productId)
+    axios.post('newReview/' + this.state.productId)
     .then((res) => {
       console.log(res);
     })
@@ -48,7 +48,7 @@ class App extends React.Component {
 
   delete(id) {
     $.ajax({
-      url: 'deleteReview/' + id,
+      url: 'deletedReview/' + id,
       type: 'DELETE',
       success: (data, res) => {
         console.log('data: ', data);
@@ -58,7 +58,7 @@ class App extends React.Component {
 
   edit(id) {
     $.ajax({
-      url: 'editReview/' + id,
+      url: 'editedReview/' + id,
       type: 'PUT',
       success: (data, res) => {
         console.log('data: ', data);
