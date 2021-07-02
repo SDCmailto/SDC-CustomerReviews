@@ -16,7 +16,29 @@
 
 ## Usage
 
-> Some usage instructions
+> This service contains
+
+>1.1 API Endpoints
+* GET '/reviews/:productid'
+* Given a product id, retrieves all reviews for that product. Each review has this shape:
+  * productId
+  * userName
+  * rating
+  * title
+  * location
+  * reviewDate
+  * reviewBody
+  * helpfulCount
+  * abuseReported
+* GET '/averagereview/:productid'
+* Given a product id, retrieves the average review score for that product.
+* POST '/newReview/:productid'
+* Given a product id, creates a new review for that product and saves it to the db.
+* PUT '/editedReview/:reviewId'
+* Given a review id, looks up and updates that review in the db.
+* DELETE '/deletedReview/:reviewId'
+* Given a review id, removes that review from the db.
+
 
 ## Requirements
 
@@ -26,6 +48,7 @@ An `nvmrc` file is included if using [nvm](https://github.com/creationix/nvm).
 - etc
 
 ## Development
+![Postgres Schema Diagram](https://github.com/SDCmailto/SDC-CustomerReviews/blob/main/assets/schema.png)
 
 ### Installing Dependencies
 
