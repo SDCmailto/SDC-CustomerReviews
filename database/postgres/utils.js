@@ -4,7 +4,7 @@ module.exports = {
   createProducts: () => {
     let products = [];
     const min = 100
-    for (let i = 0; i < 20; i++) {
+    for (let i = 0; i < 1000000; i++) {
       let totalReviews = faker.datatype.number(3000)
       let random = Math.floor(Math.random() * (totalReviews - min + 1) + min)
       let product = {
@@ -52,7 +52,7 @@ module.exports = {
           reviewBody: faker.lorem.paragraph(),
           helpfulCount: faker.datatype.number(2000),
         }
-        const data = `${review.id},${review.title},${review.abuseReported},${review.rating},${review.location_},${review.userId},${review.productId},${review.reviewDate},${review.reviewBody},${review.helpfulCount}\n`;
+        const data = `${review.review_id},${review.title},${review.abuseReported},${review.rating},${review.location_},${review.userId},${review.productId},${review.reviewDate},${review.reviewBody},${review.helpfulCount}\n`;
         if (i === 10000000) {
           writer.write(data, encoding, cb);
         } else {
@@ -133,7 +133,7 @@ module.exports = {
           productid: id,
           featureid: range[random]
         }
-        const data = `${productFeature.id},${productFeature.productid},${productFeature.featureid}\n`;
+        const data = `${productFeature.productFeature_id},${productFeature.productid},${productFeature.featureid}\n`;
         if (i === 0) {
           writer.write(data, encoding, cb);
         } else {
