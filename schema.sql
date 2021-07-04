@@ -3,39 +3,45 @@ CREATE DATABASE sdc;
 
 DROP TABLE IF EXISTS Products CASCADE;
 CREATE TABLE IF NOT EXISTS Products (
-  product_id INTEGER,
+  id SERIAL PRIMARY KEY,
   avgRating DECIMAL,
   totalReviews INTEGER,
   totalRatings INTEGER
 );
 DROP TABLE IF EXISTS Users CASCADE;
 CREATE TABLE IF NOT EXISTS Users (
-  userid INTEGER,
+  id SERIAL PRIMARY KEY,
   name_ TEXT,
   userrating INTEGER,
   totalreviews INTEGER
 );
 DROP TABLE IF EXISTS Features CASCADE;
 CREATE TABLE IF NOT EXISTS Features (
- feature_id INTEGER,
+ id SERIAL PRIMARY KEY,
  name_ TEXT
 );
 DROP TABLE IF EXISTS ProductFeatures CASCADE;
 CREATE TABLE ProductFeatures (
- productFeature_id INTEGER,
- productid INTEGER,
- featureid INTEGER
+ productid int REFERENCES products (id) ON UPDATE CASCADE ON DELETE CASCADE,
+ featureid int REFERENCES features(id) ON UPDATE CASCADE,
+ CONSTRAINT ProductFeatures_pkey PRIMARY KEY (productid, featureid)
 );
 DROP TABLE IF EXISTS Reviews CASCADE;
 CREATE TABLE IF NOT EXISTS Reviews (
- review_id INTEGER,
+ id SERIAL PRIMARY KEY,
  title TEXT,
  abuseReported BOOLEAN,
  rating INTEGER,
  location_ TEXT,
- userId INTEGER,
- productId INTEGER,
+ userid int REFERENCES users(id) ON UPDATE CASCADE,
+ productid int REFERENCES products(id) ON UPDATE CASCADE,
  reviewDate TIMESTAMP,
  reviewBody TEXT,
  helpfulCount INTEGER
+);
+
+DROP TABLE IF EXISTS Product_Features_Array CASCADE;
+CREATE TABLE IF NOT EXISTS Product_Features_Array (
+ productid SERIAL PRIMARY KEY,
+ featureid INTEGER[]
 );

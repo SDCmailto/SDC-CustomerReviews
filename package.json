@@ -13,7 +13,7 @@
     "build": "webpack --mode production",
     "create-db": "psql postgres < schema.sql",
     "seed": "./database/postgres/index.js",
-    "writeToCsv": "node ./database/postgres/csv.js",
+    "writeToCsv": "node ./database/postgres/tests.js",
     "start": "nodemon server/index.js",
     "altStart": "webpack-dev-server --open --mode development",
     "watch": "webpack --watch",
@@ -32,7 +32,6 @@
   "dependencies": {
     "axios": "^0.21.1",
     "body-parser": "^1.19.0",
-    "config.json": "^0.0.4",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
@@ -48,11 +47,9 @@
     "node": "^16.3.0",
     "nodemon": "^2.0.7",
     "pg": "^8.6.0",
-    "pg-copy-streams": "^5.1.1",
     "postgres": "^1.0.2",
     "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "validator": "^13.6.0"
+    "react-dom": "^17.0.2"
   },
   "devDependencies": {
     "@babel/core": "^7.14.6",

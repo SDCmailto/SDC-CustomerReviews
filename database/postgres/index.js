@@ -16,16 +16,27 @@ client
 
 const seed = () => {
 
-    const seedingQueries = [`COPY users(userid, name_, userrating, totalreviews) FROM '/Users/hannahmanfredi/Desktop/SDC/SDC-CustomerReviews/users.csv' CSV HEADER`, `COPY features(feature_id, name_) FROM '/Users/hannahmanfredi/Desktop/SDC/SDC-CustomerReviews/features.csv' CSV HEADER`, `COPY productfeatures(productFeature_id, productid, featureid) FROM '/Users/hannahmanfredi/Desktop/SDC/SDC-CustomerReviews/productFeatures.csv' CSV HEADER`, `COPY products(product_id, avgRating, totalReviews, totalRatings) FROM '/Users/hannahmanfredi/Desktop/SDC/SDC-CustomerReviews/products.csv' CSV HEADER`];
+    const allSeedingQueries = [`COPY users(name_, userrating, totalreviews) FROM '/Users/hannahmanfredi/Desktop/SDC/SDC-CustomerReviews/users.csv' CSV HEADER`, `COPY features(name_) FROM '/Users/hannahmanfredi/Desktop/SDC/SDC-CustomerReviews/features.csv' DELIMITER ',' CSV HEADER;`, `COPY products(avgRating, totalReviews, totalRatings) FROM '/Users/hannahmanfredi/Desktop/SDC/SDC-CustomerReviews/products.csv' CSV HEADER`, `COPY product_features_array(featureid) FROM '/Users/hannahmanfredi/Desktop/SDC/SDC-CustomerReviews/product_Features_Array.csv' CSV HEADER`];
 
-    seedingQueries.forEach(query => {
+    // let query = `COPY reviews(title, abuseReported, rating, location_, userid, productid, reviewDate, reviewBody, helpfulCount) FROM '/Users/hannahmanfredi/Desktop/SDC/SDC-CustomerReviews/reviews.csv' CSV HEADER`
+
+    // allSeedingQueries.forEach(query => {
+    //     client.query(query, (err, res) => {
+    //         if (err) throw err
+    //         console.log(res)
+    //         console.log('query: ', query)
+    //         })
+    // });
+
         client.query(query, (err, res) => {
-            if (err) throw err
-            console.log(res)
-            console.log('query: ', query)
-            })
-    });
-
+            if (err) {
+                throw err
+            } else {
+                console.log('completed seeding product features arrays')
+            }
+        });
 }
 
 seed()
+
+//seeded = products, users, features, productfeaturesarray

@@ -10,9 +10,9 @@ const router = require('./routes.js');
 const app = express()
 module.exports = app;
 
-const neode = require('neode')
-    .fromEnv()
-    .withDirectory(path.join(__dirname, '../database/neo4j/models'));
+// const neode = require('neode')
+//     .fromEnv()
+//     .withDirectory(path.join(__dirname, '../database/neo4j/models'));
 
 app.use(morgan('dev'));
 app.use(parser.json());

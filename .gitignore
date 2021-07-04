@@ -4,6 +4,7 @@ users.CSV
 products.CSV
 features.CSV
 productFeatures.CSV
+product_Features_Array.CSV
 
 ## general config ##
 config.js
