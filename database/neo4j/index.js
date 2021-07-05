@@ -1,63 +1,58 @@
-const neode = require('neode')
-    .fromEnv()
-    .with({
-    Product: require("./models/Product"),
-    Review: require("./models/Review"),
-    User: require("./models/User"),
+const neo4j = require('neo4j-driver')
+const config = require('../../config');
+
+const driver = neo4j.driver(
+  'bolt://localhost:7687',
+  neo4j.auth.basic('neo4j', config.password)
+)
+
+// Create a session to run Cypher statements in.
+// Note: Always make sure to close sessions when you are done using them!
+
+// const session = driver.session()
+const session = driver.session({
+  database: 'neo4j',
+  defaultAccessMode: neo4j.session.WRITE
+})
+
+const resultPromise = session.writeTransaction(tx =>
+  tx.run(
+    'CREATE (a:Greeting) SET a.message = $message RETURN a.message + ", from node " + id(a)',
+    { message: 'hello, world' }
+  )
+)
+
+resultPromise.then(result => {
+  session.close()
+
+  const singleRecord = result.records[0]
+  const greeting = singleRecord.get(0)
+
+  console.log(greeting)
+
+  // on application exit:
+  driver.close()
+})
+
+const seed = () => {
+
+    const allSeedingQueries = [`LOAD CSV WITH HEADERS FROM 'file:///products.csv' AS row RETURN row LIMIT 5;`];
+
+    allSeedingQueries.forEach(cypher => {
+        session.run(cypher)
     });
+}
 
-instance.model('Product', {
-  product_id: {
-      primary: true,
-      type: 'int',
-      required: true
-  },
-  avgRating: {
-      type: 'number',
-      unique: 'true'
-  },
-  totalReviews: {
-      type: 'number',
-      index: true,
-  },
-});
+seed()
 
-instance.model('Product').relationship('reviewed', 'rated' {
-  since: {
-      type: 'number',
-      required: true,
-  }
-});
+module.exports = function(req, res, next) {
+  req.driver = driver;
 
-instance.create('Product', {
-  name: 'Rabbit Food'
-})
-.then(adam => {
-  console.log('Rabbit Food'.get('name')); //'Rabbit Food'
-});
+  next();
+};
 
-instance.merge('Product', {
-  product_id: 1,
-  name: 'Rabbit Food'
-})
-.then(adam => {
-  console.log('Rabbit Food'.get('name')); // 'Rabbit Food'
-});
+module.exports.seed = seed
 
-instance.find('Person', {person_id: 1})
-    .then(adam => adam.delete());
-
-    instance.all('Person', {name: 'Adam'},{name: 'ASC', id: 'DESC'},1,0)
-    .then(collection => {
-        console.log(collection.length); // 1
-        console.log(collection.get(0).get('name')); // 'Adam'
-    })
-
-    instance.find('Person', 1)
-    .then(res => {...});
-
-    instance.cypher(
-      'MATCH (p:Person {name: {name}}) RETURN p', {name: "Adam"})
-      .then(res => {
-          console.log(res.records.length);
-      })
+//manually move all cv files to neo4j import dir
+//cp /Users/hannahmanfredi/Desktop/SDC/SDC-CustomerReviews/products.csv .
+//All data from the CSV file is read as a string, so you need to use toInteger(), toFloat(), split() or similar functions to convert values:

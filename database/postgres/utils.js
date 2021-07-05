@@ -28,14 +28,14 @@ module.exports = {
         i += 1;
         let date = JSON.stringify(faker.date.past()).slice(1, 11)
         let review = {
-          title: faker.lorem.words(),
+          title: faker.lorem.words().slice(0, 4),
           abuseReported: faker.datatype.boolean(),
           rating: faker.datatype.number(5),
           location_: faker.address.country(),
           userid: Math.floor((Math. random() * 1000000) + 1),
           productid: Math.floor((Math. random() * 1000000) + 1),
           reviewDate: date,
-          reviewBody: faker.lorem.paragraph(),
+          reviewBody: faker.lorem.paragraph().slice(0, 4),
           helpfulCount: faker.datatype.number(2000),
         }
         const data = `${review.title},${review.abuseReported},${review.rating},${review.location_},${review.userid},${review.productid},${review.reviewDate},${review.reviewBody},${review.helpfulCount}\n`;
@@ -114,28 +114,23 @@ module.exports = {
     return users
   },
   create10MillProductFeatures: (writer, encoding, cb)=> {
-    let i = 3000000;
-    let results = []
+    let i = 0;
     function write() {
       let ok = true;
       do {
-        i -= 1;
+        i += 1;
         let productFeature = {
-          productid: Math.floor((Math. random() * 1000000) + 1),
+          productid: i,
           featureid: Math.floor((Math. random() * 29) + 1)
         }
         const data = `${productFeature.productid},${productFeature.featureid}\n`;
-        results.push(data)
-        if (results.indexOf(data) > -1) {
-          continue;
-        }
-        if (i === 0) {
+        if (i === 1000000) {
           writer.write(data, encoding, cb);
         } else {
           ok = writer.write(data, encoding);
         }
-      } while (i > 0 && ok);
-      if (i > 0) {
+      } while (i < 1000000 && ok);
+      if (i < 1000000) {
         writer.once('drain', write);
       }
     }
