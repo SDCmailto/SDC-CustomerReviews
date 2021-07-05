@@ -1,28 +1,40 @@
 const express = require('express')
 const parser = require('body-parser');
 const path = require('path')
-// const db = require('../database/mongo/seed')
-// const db = require('../database/postgres/seed')
 const morgan = require('morgan');
 const cors = require('cors')
 const router = require('./routes.js');
+const nconf = require("./config"),
 
 const app = express()
+  api = express();
 module.exports = app;
+module.exports = api;
 
-const neode = require('neode')
-    .fromEnv()
-    .withDirectory(path.join(__dirname, '../database/neo4j/models'));
-
+app.use(nconf.get("api_path"), api);
 app.use(require('../database/neo4j/index.js'));
-app.use(morgan('dev'));
-app.use(parser.json());
-app.use(parser.urlencoded({ extended: true }));
-app.use(express.json())
 app.use(express.static(path.join(__dirname, "..", "public")))
-app.use(cors());
+// app.use(morgan('dev'));
 
-app.use(router);
+api.use(parser.json());
+api.use(parser.urlencoded({ extended: true }));
+api.use(express.json())
+api.use(cors());
+api.use(function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Credentials", "true");
+  res.header(
+    "Access-Control-Allow-Methods",
+    "GET,HEAD,OPTIONS,POST,PUT,DELETE"
+  );
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+  );
+  next();
+});
+
+api.use(router);
 
 
 // app.get('/', (req, res) => {

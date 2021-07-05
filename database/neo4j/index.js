@@ -1,10 +1,12 @@
 const neo4j = require('neo4j-driver')
-const config = require('../../config');
+// const config = require('../../config');
+const nconf = require('../../config');
 
 const driver = neo4j.driver(
   'bolt://localhost:7687',
   neo4j.auth.basic('neo4j', config.password)
 )
+// const driver = neo4j.driver(nconf.get('neo4j-local'), neo4j.auth.basic(nconf.get('USERNAME'), nconf.get('PASSWORD')));
 
 // Create a session to run Cypher statements in.
 // Note: Always make sure to close sessions when you are done using them!
@@ -23,7 +25,7 @@ const resultPromise = session.writeTransaction(tx =>
 )
 
 resultPromise.then(result => {
-  session.close()
+  // session.close()
 
   const singleRecord = result.records[0]
   const greeting = singleRecord.get(0)
@@ -31,7 +33,7 @@ resultPromise.then(result => {
   console.log(greeting)
 
   // on application exit:
-  driver.close()
+  // driver.close()
 })
 
 const seed = () => {
