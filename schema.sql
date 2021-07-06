@@ -21,11 +21,11 @@ CREATE TABLE IF NOT EXISTS Features (
  name_ TEXT
 );
 -- DROP TABLE IF EXISTS ProductFeatures CASCADE;
--- CREATE TABLE ProductFeatures (
---  productid int REFERENCES products (id) ON UPDATE CASCADE ON DELETE CASCADE,
---  featureid int REFERENCES features(id) ON UPDATE CASCADE,
---  CONSTRAINT ProductFeatures_pkey PRIMARY KEY (productid, featureid)
--- );
+CREATE TABLE ProductFeatures (
+ productid int REFERENCES products (id) ON UPDATE CASCADE ON DELETE CASCADE,
+ featureid int REFERENCES features(id) ON UPDATE CASCADE,
+ CONSTRAINT ProductFeatures_pkey PRIMARY KEY (productid, featureid)
+);
 DROP TABLE IF EXISTS Reviews CASCADE;
 CREATE TABLE IF NOT EXISTS Reviews (
  id SERIAL PRIMARY KEY,

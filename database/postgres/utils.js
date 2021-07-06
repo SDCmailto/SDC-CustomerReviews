@@ -28,55 +28,26 @@ module.exports = {
         i += 1;
         let date = JSON.stringify(faker.date.past()).slice(1, 11)
         let review = {
-          title: faker.lorem.words().slice(0, 4),
+          title: faker.lorem.words().replace(/,/g, ""),
           abuseReported: faker.datatype.boolean(),
           rating: faker.datatype.number(5),
-          location_: faker.address.country(),
+          location_: faker.address.country().replace(/,/g, ""),
           userid: Math.floor((Math. random() * 1000000) + 1),
           productid: Math.floor((Math. random() * 1000000) + 1),
           reviewDate: date,
-          reviewBody: faker.lorem.paragraph().slice(0, 4),
+          reviewBody: faker.lorem.paragraph().replace(/,/g, ""),
           helpfulCount: faker.datatype.number(2000),
         }
         const data = `${review.title},${review.abuseReported},${review.rating},${review.location_},${review.userid},${review.productid},${review.reviewDate},${review.reviewBody},${review.helpfulCount}\n`;
         if (i === 40000000) {
-          writer.write(data.slice(-1), encoding, cb);
+          // if (i === 1000) {
+          writer.write(data, encoding, cb);
         } else {
           ok = writer.write(data, encoding);
         }
       } while (i < 40000000 && ok);
+    // } while (i < 1000 && ok);
       if (i > 0) {
-        writer.once('drain', write);
-      }
-    }
-    write()
-  },
-  createReviewsTest: (writer, encoding, cb) => {
-    let i = 0;
-    function write() {
-      let ok = true;
-      do {
-        i += 1;
-        let date = JSON.stringify(faker.date.past()).slice(1, 11)
-        let review = {
-          title: faker.lorem.words(),
-          abuseReported: faker.datatype.boolean(),
-          rating: faker.datatype.number(5),
-          location_: faker.address.country(),
-          userid: Math.floor((Math. random() * 1000000) + 1),
-          productid: Math.floor((Math. random() * 1000000) + 1),
-          reviewDate: date,
-          reviewBody: faker.lorem.paragraph(),
-          helpfulCount: faker.datatype.number(2000),
-        }
-        const data = `${review.title},${review.abuseReported},${review.rating},${review.location_},${review.userid},${review.productid},${review.reviewDate},${review.reviewBody},${review.helpfulCount}\n`;
-        if (i === 9) {
-          writer.write(data.slice(-1), encoding, cb);
-        } else {
-          ok = writer.write(data, encoding);
-        }
-      } while (i < 10 && ok);
-      if (i === 9) {
         writer.once('drain', write);
       }
     }

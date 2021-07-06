@@ -55,6 +55,6 @@ module.exports = function(req, res, next) {
 
 module.exports.seed = seed
 
-//manually move all cv files to neo4j import dir
+//manually move all csv files to neo4j import dir
 //cp /Users/hannahmanfredi/Desktop/SDC/SDC-CustomerReviews/products.csv .
 //All data from the CSV file is read as a string, so you need to use toInteger(), toFloat(), split() or similar functions to convert values:

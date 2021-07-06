@@ -4,17 +4,17 @@ const path = require('path')
 const morgan = require('morgan');
 const cors = require('cors')
 const router = require('./routes.js');
-const nconf = require("./config"),
+const nconf = require('../config');
 
 const app = express()
   api = express();
 module.exports = app;
 module.exports = api;
 
-app.use(nconf.get("api_path"), api);
-app.use(require('../database/neo4j/index.js'));
+// app.use(nconf.get("api_path"), api);
+// app.use(require('../database/neo4j/index.js'));
 app.use(express.static(path.join(__dirname, "..", "public")))
-// app.use(morgan('dev'));
+app.use(morgan('dev'));
 
 api.use(parser.json());
 api.use(parser.urlencoded({ extended: true }));
