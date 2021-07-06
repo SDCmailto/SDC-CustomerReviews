@@ -11,8 +11,8 @@ const app = express()
 module.exports = app;
 module.exports = api;
 
-// app.use(nconf.get("api_path"), api);
-// app.use(require('../database/neo4j/index.js'));
+app.use(nconf.get("api_path"), api);
+app.use(require('../database/neo4j/index.js'));
 app.use(express.static(path.join(__dirname, "..", "public")))
 app.use(morgan('dev'));
 
