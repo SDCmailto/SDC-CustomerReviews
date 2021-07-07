@@ -8,6 +8,13 @@ products.CSV
 features.CSV
 productFeatures.CSV
 product_Features_Array.CSV
+productFeaturesSet.CSV
+neoproducts.csv
+neousers.csv
+neoreviews.csv
+neofeatures.csv
+neoproductFeaturesarray.csv
+neoproductFeatures.csv
 
 ## general config ##
 config.js

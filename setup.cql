@@ -1,0 +1,11 @@
+CREATE CONSTRAINT ON (n:Product) ASSERT n.id IS UNIQUE;
+
+CREATE CONSTRAINT ON (n:Review) ASSERT n.id IS UNIQUE;
+
+CREATE CONSTRAINT ON (n:User) ASSERT n.id IS UNIQUE;
+
+LOAD CSV WITH HEADERS FROM 'file:///products.csv' AS row
+
+LOAD CSV WITH HEADERS FROM 'file:///reviews.csv' AS row
+
+LOAD CSV WITH HEADERS FROM 'file:///users.csv' AS row

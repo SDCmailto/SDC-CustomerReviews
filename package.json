@@ -12,10 +12,10 @@
     "test:watch": "jest --watch",
     "build": "webpack --mode production",
     "create-db": "psql postgres < schema.sql",
-    "seed": "./database/postgres/index.js",
-    "writeToCsv": "node ./database/postgres/csv.js",
-    "start": "nodemon server/index.js",
-    "altStart": "webpack-dev-server --open --mode development",
+    "seed": "./database/postgres/seed.js",
+    "writeToCsv": "node ./database/neo4j/csv.js",
+    "start": "node server/index.js",
+    "altStart": "nodemon server/index.js",
     "watch": "webpack --watch",
     "deploy": "aws s3 sync public/ s3://sdc-customer-reviews"
   },
@@ -32,6 +32,7 @@
   "dependencies": {
     "axios": "^0.21.1",
     "body-parser": "^1.19.0",
+    "circleci": "^0.3.3",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",

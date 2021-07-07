@@ -40,13 +40,11 @@ module.exports = {
         }
         const data = `${review.title},${review.abuseReported},${review.rating},${review.location_},${review.userid},${review.productid},${review.reviewDate},${review.reviewBody},${review.helpfulCount}\n`;
         if (i === 40000000) {
-          // if (i === 1000) {
           writer.write(data, encoding, cb);
         } else {
           ok = writer.write(data, encoding);
         }
       } while (i < 40000000 && ok);
-    // } while (i < 1000 && ok);
       if (i > 0) {
         writer.once('drain', write);
       }
@@ -84,7 +82,7 @@ module.exports = {
     }
     return users
   },
-  create10MillProductFeatures: (writer, encoding, cb)=> {
+  createProductFeatures: (writer, encoding, cb) => {
     let i = 0;
     function write() {
       let ok = true;
@@ -107,7 +105,46 @@ module.exports = {
     }
     write()
   },
-  createOneMillionFeatures: () => {
+  createProductFeaturesSet: (writer, encoding, cb) => {
+    let i = 0;
+    let dataSet = new Set()
+    function writeDataSet() {
+      if (i === 10000000) {
+        return;
+      }
+      let productFeature = {
+        productid: Math.floor((Math. random() * 1000000) + 2),
+        featureid: Math.floor((Math. random() * 29) + 1)
+      }
+      const data = `${productFeature.productid},${productFeature.featureid}\n`;
+      if (dataSet.has(data)) {
+        writeDataSet()
+      } else {
+        i += 1
+        dataSet.add(data)
+        writeDataSet()
+      }
+    }
+    writeDataSet()
+    function write(set, j = 0) {
+      let ok = true;
+      let len = set.size
+      if (len === 1) {
+        let row = `${1},${22}\n`;
+        writer.write(row, encoding, cb);
+      } else {
+        j += 1
+        let data = set.values();
+        let row = data.next().value
+        ok = writer.write(row, encoding);
+        writer.once('drain', write);
+        set.delete(row)
+        write(set, j)
+      }
+    }
+    write(dataSet, 0)
+  },
+  createProductFeaturesArray: () => {
     let productFeatures = [];
     let range = Array.from({length: 29}, (_, i) => i + 1);
     let featureTotals = [1, 2, 3, 4, 5]
@@ -140,5 +177,31 @@ module.exports = {
       productFeatures.push(productFeature)
     }
     return productFeatures
+  },
+  createSets: () => {
+    let bigDaddy = new Set()
+    let dataArrays = []
+    const sets = () => {
+      let dataSet = new Set()
+      for (let i = 0; i < 1000000; i++) {
+        let productFeature = {
+          productid: Math.floor((Math. random() * 1000000) + 1),
+          featureid: Math.floor((Math. random() * 29) + 1)
+        }
+        if (dataSet.has(productFeature) && bigDaddy.has(productFeature)) {
+          continue;
+        } else {
+          dataSet.add(productFeature)
+          bigDaddy.add(productFeature)
+        }
+      }
+      let data = Array.from(dataSet)
+      return data
+    }
+    while (dataArrays.length < 6) {
+      let littleSet = sets()
+      dataArrays.push(littleSet)
+    }
+    return dataArrays
   }
 };
