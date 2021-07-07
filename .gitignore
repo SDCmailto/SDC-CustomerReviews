@@ -15,6 +15,7 @@ neoreviews.csv
 neofeatures.csv
 neoproductFeaturesarray.csv
 neoproductFeatures.csv
+set.csv
 
 ## general config ##
 config.js
