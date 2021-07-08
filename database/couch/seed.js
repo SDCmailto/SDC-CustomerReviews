@@ -1,36 +1,13 @@
 const faker = require('faker');
 const axios = require('axios');
 const uuid = require('uuid');
-const couchdb = require('./index.js').couchdb;
-const config = require('./config.js');
-
-const seed = () => {
-  let count = 2001;
-  const bulkInsert = []
-  while (count > 0) {
-    for (var i = 0; i < 5000; i++) {
-      let record = generateData()
-      bulkInsert.push(record)
-    }
-    axios.post(`http://admin:${config.password}@localhost:5984/sdc/_bulk_docs`, bulkInsert)
-    .then((res) => {
-      if (dbCounter < 10000000) {
-        seedScript(dbCounter);
-      }
-    })
-    .catch((err) => {
-      console.log('couchDB RES - ERROR:', err);
-    });
-    count -= 1;
-  }
-}
-
-seed();
 
 const generateData = () => {
   let record = {};
   record['id'] = uuid.v1();
+  const min = 100
   let totalReviews = faker.datatype.number(3000)
+  let random = Math.floor(Math.random() * (totalReviews - min + 1) + min)
   let product = {
     avgRating: faker.datatype.number({
       'min': 1,
@@ -83,6 +60,31 @@ const generateData = () => {
   record.features = features
   return record
 }
+
+const seed = () => {
+  let count = 2001;
+  const bulkInsert = []
+  while (count > 0) {
+    console.log('count: ', count)
+    for (var i = 0; i < 5000; i++) {
+      let record = generateData()
+      bulkInsert.push(record)
+    }
+    console.log(bulkInsert.length)
+    // axios.post(`http://admin:${config.password}@localhost:5984/sdc/_bulk_docs`, bulkInsert)
+    // .then((res) => {
+    //   if (dbCounter < 10000000) {
+    //     seedScript(dbCounter);
+    //   }
+    // })
+    // .catch((err) => {
+    //   console.log('couchDB RES - ERROR:', err);
+    // });
+    count -= 1;
+  }
+}
+
+seed();
 
 module.exports.seed = seed
 

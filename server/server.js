@@ -6,6 +6,7 @@ const router = require('./routes.js');
 
 const app = express()
   api = express();
+  couchDb = express();
 module.exports = app;
 module.exports = api;
 
