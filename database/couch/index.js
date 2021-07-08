@@ -10,6 +10,10 @@ const couch = new NodeCouchDb({
   }
 });
 
+couch.createDatabase('sdc').then(() => {...}, err => {
+  console.log(err)
+});
+
 couch.listDatabases().then((dbs, err) => {
   if (err) {
     console.log(err);

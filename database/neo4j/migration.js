@@ -1,1 +1,0 @@
-LOAD CSV WITH HEADERS FROM file:///products.csv;

@@ -1,6 +1,3 @@
-const _ = require('lodash');
-const Genre = require('../models/neo4j/genre');
-
 module.exports = {
   labels: ['Product'],
   product_id: {
@@ -24,3 +21,4 @@ module.exports = {
     }
 }
 };
+

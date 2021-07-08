@@ -1,26 +1,15 @@
 const express = require('express')
 const parser = require('body-parser');
 const path = require('path')
-const morgan = require('morgan');
 const cors = require('cors')
 const router = require('./routes.js');
-const nconf = require('../config.js');
-
-console.log('mode: ', process.env.NODE_ENV)
 
 const app = express()
   api = express();
 module.exports = app;
 module.exports = api;
 
-//i have 2 node apps running on same comp
-//at some pt i'll have multiple boxes (ec2's)
-//cluster shell? clush lets you log into multiple ec2 instances at same time with diff start commands
-//.env doesnt go to git but still has version mgmt
-
-app.use(require('../database/neo4j/index.js'));
 app.use(express.static(path.join(__dirname, "..", "public")))
-app.use(morgan('dev'));
 
 api.use(parser.json());
 api.use(parser.urlencoded({ extended: true }));
@@ -42,28 +31,3 @@ api.use(function (req, res, next) {
 
 api.use(router);
 
-
-// app.get('/', (req, res) => {
-//   // Create Driver session
-//   const session = req.driver.session();
-
-//   // Run Cypher query
-//   const cypher = 'MATCH (n) RETURN count(n) as count';
-
-//   session.run(cypher)
-//       .then(result => {
-//           // On result, get count from first record
-//           const count = result.records[0].get('count');
-
-//           // Send response
-//           res.send({count: count.toNumber()});
-//       })
-//       .catch(e => {
-//           // Output the error
-//           res.status(500).send(e);
-//       })
-//       .then(() => {
-//           // Close the session
-//           return session.close();
-//       });
-// });
