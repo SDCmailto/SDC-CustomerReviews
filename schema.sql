@@ -1,41 +1,55 @@
 CREATE DATABASE sdc;
 \c sdc
 
-DROP TABLE IF EXISTS Products CASCADE;
+-- DROP TABLE IF EXISTS Products CASCADE;
 CREATE TABLE IF NOT EXISTS Products (
-  product_id SERIAL PRIMARY KEY,
+  id SERIAL PRIMARY KEY,
   avgRating DECIMAL,
   totalReviews INTEGER,
   totalRatings INTEGER
 );
-DROP TABLE IF EXISTS Users CASCADE;
+-- DROP TABLE IF EXISTS Users CASCADE;
 CREATE TABLE IF NOT EXISTS Users (
-  userid SERIAL PRIMARY KEY,
+  id SERIAL PRIMARY KEY,
   name_ TEXT,
   userrating INTEGER,
   totalreviews INTEGER
 );
-DROP TABLE IF EXISTS Features CASCADE;
+-- DROP TABLE IF EXISTS Features CASCADE;
 CREATE TABLE IF NOT EXISTS Features (
- feature_id SERIAL PRIMARY KEY,
+ id SERIAL PRIMARY KEY,
  name_ TEXT
 );
-DROP TABLE IF EXISTS ProductFeatures CASCADE;
+-- DROP TABLE IF EXISTS ProductFeatures CASCADE;
 CREATE TABLE ProductFeatures (
- productFeature_id SERIAL PRIMARY KEY,
- productid INTEGER,
- featureid INTEGER
+ productid int REFERENCES products (id) ON UPDATE CASCADE ON DELETE CASCADE,
+ featureid int REFERENCES features(id) ON UPDATE CASCADE,
+ CONSTRAINT ProductFeatures_pkey PRIMARY KEY (productid, featureid)
 );
-DROP TABLE IF EXISTS Reviews CASCADE;
+-- DROP TABLE IF EXISTS Reviews CASCADE;
 CREATE TABLE IF NOT EXISTS Reviews (
- review_id SERIAL PRIMARY KEY,
- title TEXT,
+ id SERIAL PRIMARY KEY,
+ title VARCHAR,
  abuseReported BOOLEAN,
  rating INTEGER,
- location_ TEXT,
- userId INTEGER,
- productId INTEGER,
+ location_ VARCHAR,
+ userid INTEGER,
+ productid INTEGER,
  reviewDate TIMESTAMP,
- reviewBody TEXT,
+ reviewBody VARCHAR,
  helpfulCount INTEGER
 );
+
+-- DROP TABLE IF EXISTS Product_Features_Array CASCADE;
+CREATE TABLE IF NOT EXISTS Product_Features_Array (
+ productid SERIAL PRIMARY KEY,
+ featureid INTEGER[]
+);
+
+DROP TABLE IF EXISTS Product_Features_Set CASCADE;
+CREATE TABLE IF NOT EXISTS Product_Features_Set (
+ productid int REFERENCES products (id) ON UPDATE CASCADE ON DELETE CASCADE,
+ featureid int REFERENCES features(id) ON UPDATE CASCADE,
+ CONSTRAINT ProductFeatures_Set_pkey PRIMARY KEY (productid, featureid)
+);
+

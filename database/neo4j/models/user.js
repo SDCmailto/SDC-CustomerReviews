@@ -9,7 +9,7 @@ module.exports = {
   },
   userrating: {
     type: 'number'
-  }
+  },
   totalReviews: {
     type: 'number'
   },

@@ -39,7 +39,11 @@
 * DELETE '/deletedReview/:reviewId'
 * Given a review id, removes that review from the db.
 
+## Seeding Postgres Database
 
+* npm run writeToCsv (estimated time to completion)
+
+* npm start
 ## Requirements
 
 An `nvmrc` file is included if using [nvm](https://github.com/creationix/nvm).
