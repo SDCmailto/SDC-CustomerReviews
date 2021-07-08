@@ -1,22 +1,32 @@
-const NodeCouchDb = require('node-couchdb');
+const cradle = require('cradle');
 
-const couch = new NodeCouchDb({
-  host: 'localhost',
-  protocol: 'http',
-  port: 5984,
-  auth: {
-      user: 'admin',
-      pass: ''
-  }
+cradle.setup({
+  host: 'living-room.couch',
+  cache: true,
+  raw: false,
+  forceSave: true
 });
 
-couch.createDatabase('sdc').then(() => {...}, err => {
-  console.log(err)
-});
+const couch = new(cradle.Connection)
+const couchdb = couch.database('amazon-reviews');
 
-couch.listDatabases().then((dbs, err) => {
+couchdb.exists(function (err, exists) {
   if (err) {
-    console.log(err);
+    console.log('error', err);
+  } else if (exists) {
+    console.log('the force is with you.');
+  } else {
+    console.log('database does not exist.');
   }
-  console.log(dbs);
+});
+
+module.exports.couchdb = couchdb;
+
+//move to seed
+db.save([
+  { name: 'Yoda' },
+  { name: 'Han Solo' },
+  { name: 'Leia' }
+], function (err, res) {
+  // Handle response
 });
