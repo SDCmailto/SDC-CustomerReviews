@@ -1,3 +1,23 @@
+neo4jApi.js
+
+## CSV files ##
+reviews.CSV
+reviews1.CSV
+users.CSV
+products.CSV
+features.CSV
+productFeatures.CSV
+product_Features_Array.CSV
+productFeaturesarray.csv
+productFeaturesSet.CSV
+neoproducts.csv
+neousers.csv
+neoreviews.csv
+neofeatures.csv
+neoproductFeaturesarray.csv
+neoproductFeatures.csv
+set.csv
+
 ## general config ##
 config.js
 

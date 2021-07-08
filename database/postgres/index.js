@@ -1,38 +1,49 @@
-const { Pool, Client} = require('pg')
-const { host, user, database, password, port } = require('../../config');
+// const { Pool, Client } = require('pg')
+// const { host, user, database, password, port } = require('../../config.js');
 
-const pool = new Pool({
-    host,
-    user,
-    database,
-    password,
-    port,
-});
+// const client = new Client({
+//     host,
+//     user,
+//     database,
+//     password,
+//     port,
+// });
 
-pool.connect()
+// client
+//   .connect()
+//   .then(() => console.log('connected'))
+//   .catch(err => console.error('connection error', err.stack))
 
-// pool.query(`COPY users FROM '../../users.csv' WITH (FORMAT csv)`, (err, res) => {
-//     console.log(err, res)
-// })
+// let seeded = false;
 
-// pool.query(`COPY products FROM '../../products.csv' WITH (FORMAT csv)`, (err, res) => {
-//     console.log(err, res)
-// })
+// module.exports.client = client;
 
-// const reviews = ['../../reviews.csv', '../../reviews1.csv', '../../reviews2.csv', '../../reviews3.csv', '../../reviews.csv4', '../../reviews.csv5', '../../reviews.csv6', '../../reviews.csv7', '../../reviews.csv8', '../../reviews.csv9', '../../reviews.csv10']
+// const seed = () => {
 
-// reviews.forEach((reviewCsv, i) => {
-//     pool.query(`COPY reviews FROM ${reviews[i]} WITH (FORMAT csv)`, (err, res) => {
-//         console.log(err, res)
-//     })
-// })
+//     if (seeded) {
+//         return;
+//     }
 
-module.exports = {
-    query: (text, params, callback) => {
-        return pool.query(text, params, callback);
-    },
-    connect: (err, client, done) => {
-        return pool.connect(err, client, done);
-    },
-};
+//     // const allSeedingQueries = [`COPY users(name_, userrating, totalreviews) FROM '/Users/hannahmanfredi/Desktop/SDC/SDC-CustomerReviews/users.csv' CSV HEADER`, `COPY features(name_) FROM '/Users/hannahmanfredi/Desktop/SDC/SDC-CustomerReviews/features.csv' DELIMITER ',' CSV HEADER;`, `COPY products(avgRating, totalReviews, totalRatings) FROM '/Users/hannahmanfredi/Desktop/SDC/SDC-CustomerReviews/products.csv' CSV HEADER`, `COPY product_features_array(featureid) FROM '/Users/hannahmanfredi/Desktop/SDC/SDC-CustomerReviews/productFeaturesarray.csv' CSV HEADER`, `COPY productfeatures(productid, featureid) FROM '/Users/hannahmanfredi/Desktop/SDC/SDC-CustomerReviews/productFeatures.csv' CSV HEADER`, `COPY reviews(title, abuseReported, rating, location_, userid, productid, reviewDate, reviewBody, helpfulCount) FROM '/Users/hannahmanfredi/Desktop/SDC/SDC-CustomerReviews/reviews.csv' CSV HEADER`];
 
+//     let query = `COPY product_features_set(productid, featureid) FROM '/Users/hannahmanfredi/Desktop/SDC/SDC-CustomerReviews/set.csv' CSV HEADER`
+
+//     // allSeedingQueries.forEach(query => {
+//     //     client.query(query, (err, res) => {
+//     //         if (err) throw err
+//     //         console.log(res)
+//     //         console.log('query: ', query)
+//     //         })
+//     //     seeded = true;
+//     //     console.log('Postgres Seeding complete!')
+//     // });
+
+//     client.query(query, (err, res) => {
+//         if (err) throw err
+//         console.log(res)
+//         console.log('query: ', query)
+//         })
+
+// }
+
+// seed()
