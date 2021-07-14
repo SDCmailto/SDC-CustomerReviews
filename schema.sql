@@ -26,7 +26,7 @@ CREATE TABLE ProductFeatures (
  featureid int REFERENCES features(id) ON UPDATE CASCADE,
  CONSTRAINT ProductFeatures_pkey PRIMARY KEY (productid, featureid)
 );
-DROP TABLE IF EXISTS Reviews CASCADE;
+-- DROP TABLE IF EXISTS Reviews CASCADE;
 CREATE TABLE IF NOT EXISTS Reviews (
  id SERIAL PRIMARY KEY,
  title VARCHAR,
