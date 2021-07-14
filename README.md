@@ -41,9 +41,9 @@
 
 ## Seeding Postgres Database
 
-* npm run writeToCsv (estimated time to completion)
+* npm run writeToCsv (estimated time to complete generating csv files: 12 minutes and fifty-seven seconds)
 
-* npm start
+* npm start (estimated time to seed postgres db: 22 minutes and thirty-three seconds)
 ## Requirements
 
 An `nvmrc` file is included if using [nvm](https://github.com/creationix/nvm).

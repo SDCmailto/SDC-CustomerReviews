@@ -24,15 +24,22 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    let product = new URL(window.location);
-    $.ajax({
-      method: 'GET',
-      url: 'reviews/' + this.state.productId,
-      success: (data, res) => {
-        console.log('data: ', data)
-        this.setReviewsFeed(data);
-      }
+    axios.get('reviews/' + this.state.productId)
+    .then((res) => {
+      console.log(res);
     })
+    .catch((err) => {
+      throw err;
+    });
+    // $.ajax({
+    //   method: 'GET',
+    //   url: 'reviews/' + this.state.productId,
+    //   success: (data, res) => {
+    //     console.log('data: ', data)
+    //     this.setReviewsFeed(data);
+    //   }
+    // })
+
   }
 
   click(e, id) {

@@ -26,7 +26,7 @@ module.exports = {
       let ok = true;
       do {
         i += 1;
-        let date = JSON.stringify(faker.date.past()).slice(1, 11)
+        let date = JSON.stringify(faker.date.past()).slice(1, 11) //YYYY-MM-DD
         let review = {
           title: faker.lorem.words().replace(/,/g, ""),
           abuseReported: faker.datatype.boolean(),
