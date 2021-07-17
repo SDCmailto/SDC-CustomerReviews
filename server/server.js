@@ -5,27 +5,23 @@ const cors = require('cors')
 const router = require('./routes.js');
 
 const app = express()
-module.exports = app;
+
+const mode = process.env.NODE_ENV;
+console.log(`hi bebe you are in ${mode}`);
 
 app.use(express.static(path.join(__dirname, "..", "public")))
-
-app.use(parser.json());
-app.use(parser.urlencoded({ extended: true }));
+app.use(parser.urlencoded({ extended: false}))
 app.use(express.json())
 app.use(cors());
-app.use(function (req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Credentials", "true");
-  res.header(
-    "Access-Control-Allow-Methods",
-    "GET,HEAD,OPTIONS,POST,PUT,DELETE"
-  );
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept, Authorization"
-  );
-  next();
-});
-
 app.use(router);
 
+app.post('/newReview/:productid', async (req, res) => {
+  let productid = req.params.productid
+  console.log('req.body: ', req.body)
+  let review = req.body.body;
+  let result = await models.postgres.reviews.createNewReview(productid, review)
+  res.setHeader('content-type', 'application/json');
+  res.status(201).send(result)
+});
+
+module.exports = app;

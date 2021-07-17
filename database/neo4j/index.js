@@ -90,12 +90,12 @@ neode.model("Movie").mergeOn({
 
 // const seed = async () => {
 //   const session = driver.session();
-//   const results = await session.run(`LOAD CSV WITH HEADERS FROM 'file:///neoproducts.csv' AS row CREATE (p:Product {id: toInteger(row.id), avgRating: toFloat(row.avgRating), totalReviews: toInteger(row.totalReviews), totalRatings: toInteger(row.totalRatings)}) RETURN row limit 5`);
-//   session.run(`LOAD CSV WITH HEADERS FROM 'file:///neousers.csv' AS row CREATE (:User {id: toInteger(row.id), name_: row.name_, userrating: toFloat(row.userrating), totalreviews: toInteger(row.totalreviews)})`)
-//   session.run(`LOAD CSV WITH HEADERS FROM 'file:///neoreviews.csv' AS row CREATE (:User {id: toInteger(row.id), title: row.title, abuseReported: row.abuseReported, rating: toFloat(row.rating), location_,: row.location_, userid: toInteger(row.userid), productid: toInteger(row.productid), reviewDate: row.reviewDate, reviewBody: row.reviewBody, helpfulCount: toInteger(row.helpfulCount)})`)
-//   session.run(`LOAD CSV WITH HEADERS FROM 'file:///neofeatures.csv' AS row CREATE (:Feature{id: toInteger(row.id), name_: row.name_})`)
-//   session.run(`LOAD CSV WITH HEADERS FROM 'file:///neoproductFeaturesarray.csv' AS row CREATE (:ProductFeaturesarray {productid: toInteger(row.productid), featureid: toInteger(row.featureid}))`)
-//   session.run(`LOAD CSV WITH HEADERS FROM 'file:///neoproductFeatures.csv' AS row CREATE (:ProductFeature {productid: toInteger(row.productid), featureid: toInteger(row.featureid}))`)
+//   const results = await session.run(`USING PERIODIC COMMIT LOAD CSV WITH HEADERS FROM 'file:///neoproducts.csv' AS row CREATE (p:Product {id: toInteger(row.id), avgRating: toFloat(row.avgRating), totalReviews: toInteger(row.totalReviews), totalRatings: toInteger(row.totalRatings)}) RETURN row limit 5`);
+//   session.run(`USING PERIODIC COMMIT LOAD CSV WITH HEADERS FROM 'file:///neousers.csv' AS row CREATE (:User {id: toInteger(row.id), name_: row.name_, userrating: toFloat(row.userrating), totalreviews: toInteger(row.totalreviews)})`)
+//   session.run(`USING PERIODIC COMMIT LOAD CSV WITH HEADERS FROM 'file:///neoreviews.csv' AS row CREATE (:User {id: toInteger(row.id), title: row.title, abuseReported: row.abuseReported, rating: toFloat(row.rating), location_,: row.location_, userid: toInteger(row.userid), productid: toInteger(row.productid), reviewDate: row.reviewDate, reviewBody: row.reviewBody, helpfulCount: toInteger(row.helpfulCount)})`)
+//   session.run(`USING PERIODIC COMMIT LOAD CSV WITH HEADERS FROM 'file:///neofeatures.csv' AS row CREATE (:Feature{id: toInteger(row.id), name_: row.name_})`)
+//   session.run(`USING PERIODIC COMMIT LOAD CSV WITH HEADERS FROM 'file:///neoproductFeaturesarray.csv' AS row CREATE (:ProductFeaturesarray {productid: toInteger(row.productid), featureid: toInteger(row.featureid}))`)
+//   session.run(`USING PERIODIC COMMIT LOAD CSV WITH HEADERS FROM 'file:///neoproductFeatures.csv' AS row CREATE (:ProductFeature {productid: toInteger(row.productid), featureid: toInteger(row.featureid}))`)
 //   session.close();
 // }
 

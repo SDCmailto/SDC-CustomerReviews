@@ -3,6 +3,7 @@ const path = require('path');
 module.exports = {
   entry: './src/Index.jsx',
   mode: 'development',
+  watch: true,
   output: {
     filename: 'customerreviews.js',
     path: path.join(__dirname, 'public')

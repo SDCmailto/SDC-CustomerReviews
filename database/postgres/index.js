@@ -1,5 +1,6 @@
 const { Pool, Client } = require('pg')
 const { host, user, database, password, port } = require('../../config.js');
+const faker = require('faker');
 
 const client = new Client({
     host,
@@ -14,15 +15,104 @@ client
   .then(() => console.log('connected'))
   .catch(err => console.error('connection error', err.stack))
 
-let seeded = false;
+const findAllReviews = async (productId) => {
+  const query = {
+    text: `SELECT * FROM reviews JOIN users ON (reviews.userid = users.id) WHERE productid = $1`,
+    values: [productId]
+  };
+  let data = [];
+  await client.query(query)
+    .then(res => {
+      data.push(res.rows)
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  return data;
+};
 
-module.exports.client = client;
+const findAvgRating = async (productid) => {
+  const query = {
+    text: 'SELECT avgRating FROM products WHERE id = $1',
+    values: [productid]
+  };
+  let data = [];
+  await client.query(query)
+    .then(res => {
+      data.push(res.rows)
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  return data[0];
+}
+
+const createReview = async (productid, review) => {
+  console.log('db createReview invoked')
+  const idQuery = {
+    text: `SELECT COUNT (*) FROM reviews`,
+  };
+  let id = 0;
+  await client.query(idQuery)
+    .then(res => {
+      id = (res + 1)
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  const userQuery = {
+    text: `SELECT * FROM users WHERE name_ = $1`,
+    values: [review.username]
+  }
+  let userId = 0;
+  await client.query(userQuery)
+    .then(res => {
+      console.log(res.rows)
+    })
+    .catch((err) => {
+      console.log(err);
+      let userid = 0;
+      const userIdQuery = {
+        text: `SELECT COUNT (*) FROM users`
+      }
+      await client.query(userIdQuery)
+        .then(res => {
+          userid = (res + 1)
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    let userrating = faker.datatype.number(15000);
+    let totalreviews = faker.datatype.number(10000);
+      const createUserQuery = {
+        text: `INSERT INTO users VALUES ($1, $2, $3, $4)`,
+        values: [userid, review.username, userrating, totalreviews]
+      }
+    });
+  const query = {
+    text: `INSERT INTO reviews VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)`,
+    values: [id, review.title, review.abuseReported, review.rating, review.location_, review.userid, review.productid, review.reviewDate, review.reviewBody, review.helpfulCount]
+  };
+  let data = [];
+  await client.query(query)
+    .then(res => {
+      data.push(res.rows)
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  return data;
+}
+
+const updateReview = () => {
+
+}
+
+const deleteReview = () => {
+
+}
 
 const seed = () => {
-
-    if (seeded) {
-        return;
-    }
 
     const allSeedingQueries = [`COPY users(name_, userrating, totalreviews) FROM '/Users/hannahmanfredi/Desktop/SDC-CustomerReviews/users.csv' CSV HEADER`, `COPY features(name_) FROM '/Users/hannahmanfredi/Desktop/SDC-CustomerReviews/features.csv' CSV HEADER;`, `COPY products(avgRating, totalReviews, totalRatings) FROM '/Users/hannahmanfredi/Desktop/SDC-CustomerReviews/products.csv' CSV HEADER`, `COPY product_features_array(featureid) FROM '/Users/hannahmanfredi/Desktop/SDC-CustomerReviews/productFeaturesarray.csv' CSV HEADER`, `COPY productfeatures(productid, featureid) FROM '/Users/hannahmanfredi/Desktop/SDC-CustomerReviews/productFeatures.csv' CSV HEADER`, `COPY reviews(title, abuseReported, rating, location_, userid, productid, reviewDate, reviewBody, helpfulCount) FROM '/Users/hannahmanfredi/Desktop/SDC-CustomerReviews/reviews.csv' CSV HEADER`];
 
@@ -53,7 +143,10 @@ const benchmark = () => {
 
 };
 
-benchmark();
+// benchmark();
 
-module.exports.seed = seed;
-module.exports.benchmark = benchmark;
+module.exports.findAllReviews = findAllReviews;
+module.exports.findAvgRating = findAvgRating;
+module.exports.createReview = createReview;
+module.exports.updateReview = updateReview;
+module.exports.deleteReview = deleteReview;

@@ -1,40 +1,23 @@
 const controllers = require('../controllers')
-const mongo = require('../../database/mongo/index.js')
-const postgres = require('../../database/postgres/index.js')
+const db = require('../../database/postgres/index.js')
 
 module.exports = {
   postgres: {
-    products: {},
-    reviews: {
-      findAllReviews: (productId, cb) => {
-        const query = {
-          text: `SELECT * FROM reviews WHERE id = $1`
-          // values = [productId]
-        };
-        // postgres.query(query, (err, res) => {
-        //   if (err) {
-        //     console.log(err.stack)
-        //     cb(err)
-        //   } else {
-        //     console.log(res)
-        //     cb(res)
-        //   }
-        // })
+    products: {
+      findAvgRating: async (productId) => {
+        const avgRating = await db.findAvgRating(productId)
+        return avgRating;
       },
-      findAvgRating: (productId) => {
-        const query = {
-          text: 'SELECT avgRating FROM products WHERE id = $1'
-          // values: [productId]
-        };
-        // postgres.query(query, (err, res) => {
-        //   if (err) {
-        //     console.log(err.stack)
-        //     cb(err)
-        //   } else {
-        //     console.log(res)
-        //     cb(res)
-        //   }
-        // })
+    },
+    reviews: {
+      findAllReviews: async (productId) => {
+        const reviews = await db.findAllReviews(productId)
+        return reviews[0];
+      },
+      createNewReview: async (productid, review) => {
+        console.log('inside create new review')
+        const mssg = await db.createReview(productid, review)
+        return mssg;
       }
     },
     users: {},
@@ -97,5 +80,5 @@ module.exports = {
         }
       });
     }
-  },
+  }
 }

@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Reviews from './components/Reviews.jsx';
+import ReviewForm from './ReviewForm.jsx';
 import $ from 'jquery';
 import axios from 'axios';
 class App extends React.Component {
@@ -9,10 +10,12 @@ class App extends React.Component {
     this.state = {
       productId: window.location.pathname.split("/")[2] || "1",
       reviews: [],
-      score: 0
+      score: 0,
+      avgRating: 0
     };
+    this.getAvgRating = this.getAvgRating.bind(this);
     this.setReviewsFeed = this.setReviewsFeed.bind(this);
-    this.click = this.click.bind(this);
+    this.submit = this.submit.bind(this);
     this.delete = this.delete.bind(this);
     this.edit = this.edit.bind(this);
   }
@@ -24,29 +27,40 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    axios.get('reviews/' + this.state.productId)
-    .then((res) => {
-      console.log(res);
+    $.ajax({
+      method: 'GET',
+      url: 'reviews/' + this.state.productId,
+      success: (data, res) => {
+        this.setReviewsFeed(data);
+      }
     })
-    .catch((err) => {
-      throw err;
-    });
-    // $.ajax({
-    //   method: 'GET',
-    //   url: 'reviews/' + this.state.productId,
-    //   success: (data, res) => {
-    //     console.log('data: ', data)
-    //     this.setReviewsFeed(data);
-    //   }
-    // })
-
   }
 
-  click(e, id) {
-    e.preventDefault();
-    axios.post('newReview/' + this.state.productId)
-    .then((res) => {
-      console.log(res);
+  // submit(e, review) {
+  //   console.log('review: ', review)
+  //   e.preventDefault();
+  //   axios.post('newReview/' + this.state.productId, {
+  //     body: review
+  //   })
+  //   .then((res) => {
+  //     console.log(res);
+  //   })
+  //   .catch((err) => {
+  //     throw err;
+  //   });
+  // }
+
+  search (term) {
+    fetch("http://localhost:1128/repos", {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({username: term})
+    })
+    .then(response => {
+      console.log(`${term} was searched`, response.status);
+      this.getRepos()
     })
     .catch((err) => {
       throw err;
@@ -55,7 +69,7 @@ class App extends React.Component {
 
   delete(id) {
     $.ajax({
-      url: 'deletedReview/' + id,
+      url: 'deletedReview/' + this.state.productId,
       type: 'DELETE',
       success: (data, res) => {
         console.log('data: ', data);
@@ -65,10 +79,22 @@ class App extends React.Component {
 
   edit(id) {
     $.ajax({
-      url: 'editedReview/' + id,
+      url: 'editedReview/' + this.state.productId,
       type: 'PUT',
       success: (data, res) => {
         console.log('data: ', data);
+      }
+    })
+  }
+
+  getAvgRating(id) {
+    $.ajax({
+      url: 'averagerating/' + id,
+      type: 'GET',
+      success: (data, res) => {
+        this.setState({
+          avgRating: data
+        });
       }
     })
   }
@@ -77,11 +103,9 @@ class App extends React.Component {
     return (
       <div className="customer-reviews">
         <div className="write-review">
-          <div>
-            <div>Review this product</div>
-            <div>Share your thoughts with other customers</div>
-            <button id="write-review-btn" type="button" onClick={this.click}>Write a customer review</button>
-          </div>
+          <ReviewForm
+            productId={this.state.productId}
+          />
         </div>
         <Reviews
           className="reviews-container"
