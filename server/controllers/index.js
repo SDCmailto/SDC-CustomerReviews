@@ -37,10 +37,10 @@ module.exports = {
     },
     post: {
       handler: (req, res) => {
-        console.log('inside postgres.post')
+        // console.log('inside postgres.post')
         let productid = req.params.productid
         //get productid and review
-        console.log('post req: ', req)
+        // console.log('post req: ', req)
         // models.postgres.reviews.createNewReview()
       },
       config: {
@@ -49,7 +49,7 @@ module.exports = {
     },
     put: {
       handler: (req, res) => {
-      console.log('inside postgres.put')
+      // console.log('inside postgres.put')
       //invoke model
       },
       config: {
@@ -58,7 +58,7 @@ module.exports = {
     },
     delete: {
       handler: (req, res) => {
-      console.log('inside postgres.delete')
+      // console.log('inside postgres.delete')
       //invoke model
       },
       config: {

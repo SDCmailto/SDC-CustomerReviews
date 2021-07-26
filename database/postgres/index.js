@@ -48,60 +48,46 @@ const findAvgRating = async (productid) => {
 }
 
 const createReview = async (productid, review) => {
-  console.log('db createReview invoked')
+  let numbProductId = parseInt(review.productid)
   const idQuery = {
     text: `SELECT COUNT (*) FROM reviews`,
   };
-  let id = 0;
-  await client.query(idQuery)
-    .then(res => {
-      id = (res + 1)
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-  const userQuery = {
+  const result = await client.query({
+    rowMode: 'array',
+    text: 'SELECT COUNT (*) FROM reviews;',
+  })
+  let currentReviewId = result.rows[0][0]
+  console.log('currentReviewId : ', currentReviewId)
+  let id = parseInt(currentReviewId);
+  let userId = 0;
+  const userIdResult = await client.query({
+    rowMode: 'array',
     text: `SELECT * FROM users WHERE name_ = $1`,
     values: [review.username]
-  }
-  let userId = 0;
-  await client.query(userQuery)
-    .then(res => {
-      console.log(res.rows)
+  })
+  if (!userIdResult.rowCount) {
+    const makeUserId = client.query({
+      rowMode: 'array',
+      text: `SELECT COUNT (*) FROM users;`
     })
-    .catch((err) => {
-      console.log(err);
-      let userid = 0;
-      const userIdQuery = {
-        text: `SELECT COUNT (*) FROM users`
-      }
-      await client.query(userIdQuery)
-        .then(res => {
-          userid = (res + 1)
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+    userId = parseInt((result.rows[0][0]) + 1)
     let userrating = faker.datatype.number(15000);
     let totalreviews = faker.datatype.number(10000);
-      const createUserQuery = {
-        text: `INSERT INTO users VALUES ($1, $2, $3, $4)`,
-        values: [userid, review.username, userrating, totalreviews]
-      }
+    const createUserQuery =
+    await client.query({
+      text: `INSERT INTO users VALUES ($1, $2, $3, $4)`,
+      values: [userId, review.username, userrating, totalreviews]
     });
-  const query = {
-    text: `INSERT INTO reviews VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)`,
-    values: [id, review.title, review.abuseReported, review.rating, review.location_, review.userid, review.productid, review.reviewDate, review.reviewBody, review.helpfulCount]
-  };
-  let data = [];
-  await client.query(query)
-    .then(res => {
-      data.push(res.rows)
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-  return data;
+  } else {
+    userId = parseInt(userIdResult.rows[0][0])
+  }
+  let newReviewData = [];
+  const data = await client.query(query = {
+    rowMode: 'array',
+    text: `INSERT INTO reviews VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *;`,
+    values: [id, review.title, review.abuseReported, review.rating, review.location_, userId, numbProductId, review.reviewDate, review.reviewBody, review.helpfulCount]
+  });
+  return data.rows[0];
 }
 
 const updateReview = () => {

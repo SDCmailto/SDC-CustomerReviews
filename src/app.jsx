@@ -36,31 +36,14 @@ class App extends React.Component {
     })
   }
 
-  // submit(e, review) {
-  //   console.log('review: ', review)
-  //   e.preventDefault();
-  //   axios.post('newReview/' + this.state.productId, {
-  //     body: review
-  //   })
-  //   .then((res) => {
-  //     console.log(res);
-  //   })
-  //   .catch((err) => {
-  //     throw err;
-  //   });
-  // }
-
-  search (term) {
-    fetch("http://localhost:1128/repos", {
-      method: 'POST',
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({username: term})
+  submit(e, review) {
+    console.log('review: ', review)
+    e.preventDefault();
+    axios.post('newReview/' + this.state.productId, {
+      body: review
     })
-    .then(response => {
-      console.log(`${term} was searched`, response.status);
-      this.getRepos()
+    .then((res) => {
+      console.log(res);
     })
     .catch((err) => {
       throw err;
