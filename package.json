@@ -2,7 +2,7 @@
   "name": "sdc-customerreviews",
   "version": "1.0.0",
   "description": "Deploy & Scale (Legacy) Amazon Customer Reviews Service, inherited from another student in my Hack Reactor cohort's FEC project",
-  "main": "index.js",
+  "main": "/server/index.js",
   "jest": {
     "verbose": true
   },

@@ -1,5 +1,5 @@
 const controllers = require('../controllers')
-const db = require('../../database/postgres/index.js')
+const db = require('../database/postgres/index.js')
 
 module.exports = {
   postgres: {
