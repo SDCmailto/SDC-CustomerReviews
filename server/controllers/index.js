@@ -1,30 +1,34 @@
 const models = require('../models/index.js');
+const parser = require('body-parser');
 
 module.exports = {
   postgres: {
     get: {
-      reviews: {
-        handler: (req, res) => {
-          // console.log('inside postgres.get.reviews: ', req)
-          // console.log('inside postgres.get.reviews: ', Number(req.params))
-          // models.postgres.reviews.findAllReviews(productId, (err, data) => {
-          //   if (err) {
-          //     res.status(201).send('error retrieving reviews')
-          //   } else {
-          //     res.setHeader('content-type', 'application/json');
-          //     res.status(200).send(JSON.stringify(data))
-          //   }
-          // })
+      allReviews: {
+        handler: async (req, res) => {
+          let productid = req.params.productid
+          const reviews = await models.postgres.reviews.findAllReviews(productid);
+          res.setHeader('content-type', 'application/json');
+          if (!reviews.length) {
+            res.status(500).send('ERROR, there are no existing reviews for this product')
+          } else {
+            res.status(200).send(reviews)
+          }
         },
         config: {
           description: "Gets all the reviews available for a given product Id"
         }
       },
-      averageRating: {
-        handler: () => {
-          console.log('inside postgres.get.averagerating')
-          //get productId from req
-          // models.postgres.reviews.findAvgRating(productId)
+      products: {
+        handler: async (req, res) => {
+          let productid = req.params.productid
+          const avgRating = await models.postgres.products.findAvgRating(productid)
+          res.setHeader('content-type', 'application/json');
+          if (!avgRating) {
+            res.send('ERROR, this product has not yet been rated!')
+          } else {
+            res.status(200).send(avgRating)
+          }
         },
         config: {
           description: "Gets the average rating for a given product Id"
@@ -32,17 +36,20 @@ module.exports = {
       }
     },
     post: {
-      handler: () => {
-        console.log('inside postgres.post')
-        //invoke model
+      handler: (req, res) => {
+        // console.log('inside postgres.post')
+        let productid = req.params.productid
+        //get productid and review
+        // console.log('post req: ', req)
+        // models.postgres.reviews.createNewReview()
       },
       config: {
         description: "Creates a new review for given product Id and user Id"
       }
     },
     put: {
-      handler: () => {
-      console.log('inside postgres.put')
+      handler: (req, res) => {
+      // console.log('inside postgres.put')
       //invoke model
       },
       config: {
@@ -50,8 +57,8 @@ module.exports = {
       }
     },
     delete: {
-      handler: () => {
-      console.log('inside postgres.delete')
+      handler: (req, res) => {
+      // console.log('inside postgres.delete')
       //invoke model
       },
       config: {
