@@ -1,4 +1,4 @@
-const newrelic = require('newrelic')
+require('newrelic');
 const express = require('express')
 const parser = require('body-parser');
 const path = require('path')
