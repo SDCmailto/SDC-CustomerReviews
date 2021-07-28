@@ -1,4 +1,3 @@
-require('newrelic');
 const { Pool, Client } = require('pg')
 const { host, user, database, password, port } = require('../../config.js');
 const faker = require('faker');
