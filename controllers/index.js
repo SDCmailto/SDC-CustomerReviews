@@ -7,7 +7,7 @@ module.exports = {
       allReviews: {
         handler: async (req, res) => {
           let productid = req.params.productid
-          const reviews = await models.postgres.reviews.findAllReviews(productid);
+          const reviews = await models.reviews.findAllReviews(productid);
           res.setHeader('content-type', 'application/json');
           if (!reviews.length) {
             res.status(500).send('ERROR, there are no existing reviews for this product')
@@ -22,7 +22,8 @@ module.exports = {
       products: {
         handler: async (req, res) => {
           let productid = req.params.productid
-          const avgRating = await models.postgres.products.findAvgRating(productid)
+          let review = req.body.body;
+          const avgRating = await models.products.findAvgRating(productid)
           res.setHeader('content-type', 'application/json');
           if (!avgRating) {
             res.send('ERROR, this product has not yet been rated!')
@@ -35,31 +36,28 @@ module.exports = {
         }
       }
     },
-    post: {
-      handler: (req, res) => {
-        // console.log('inside postgres.post')
-        let productid = req.params.productid
-        //get productid and review
-        // console.log('post req: ', req)
-        // models.postgres.reviews.createNewReview()
-      },
-      config: {
-        description: "Creates a new review for given product Id and user Id"
-      }
-    },
     put: {
-      handler: (req, res) => {
-      // console.log('inside postgres.put')
-      //invoke model
+      handler: async (req, res) => {
+        console.log('inside postgres.put')
+        let productid = req.params.productid
+        let reviewid = req.body.body;
+        console.log('reviewid: ', reviewid)
+        const updatedReview = await models.reviews.updateReview(productid, reviewid);
+        res.setHeader('content-type', 'application/json');
+        res.status(200).send('updated')
       },
       config: {
         description: "Updates a review for given product Id and user Id"
       }
     },
     delete: {
-      handler: (req, res) => {
-      // console.log('inside postgres.delete')
-      //invoke model
+      handler: async (req, res)  => {
+        console.log('inside postgres.delete')
+        let productid = req.params.productid
+        let reviewid = req.body.body;
+        const deletedReview = await models.reviews.deleteReview(productid, reviewid);
+        res.setHeader('content-type', 'application/json');
+        res.status(200).send('deleted')
       },
       config: {
         description: "Deletes a review for given product Id and user Id"

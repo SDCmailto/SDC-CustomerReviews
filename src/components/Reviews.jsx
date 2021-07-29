@@ -9,13 +9,13 @@ class Reviews extends React.Component {
     this.click = this.click.bind(this);
   }
 
-  click(e, id) {
+  click(e, r) {
     e.preventDefault();
     console.log('e.target: ', e.target.className)
     if (e.target.className === 'helpful-button edit') {
-      this.props.edit(id);
-    } else {
-      this.props.delete(id);
+      this.props.edit(e, r.id);
+    } else if (e.target.className === 'helpful-button remove') {
+      this.props.delete(e, r.id);
     }
   }
 
@@ -37,7 +37,7 @@ class Reviews extends React.Component {
               <div className = "location-date">Reviewed in {review.location} on {moment(review.reviewDate, 'YYYY-MM-DDThh:mm:ss.sss').format('MMMM Do, YYYY')}</div>
               <div className = "review-body">{review.reviewBody}</div>
               <div className = "helpful-count"> {review.helpfulCount} people found this helpful</div>
-              <div> <button  data-testid = "helpful-button" className = "helpful-button">Helpful</button> <button className="helpful-button remove" onClick={(e) => this.click(e, review._id)}>Remove</button> <button className="helpful-button edit" onClick={(e) => this.click(e, review._id)}>Edit</button> <span className = "abuse-text">|  Report Abuse</span> </div>
+              <div> <button  data-testid = "helpful-button" className = "helpful-button">Helpful</button> <button className="helpful-button remove" onClick={(e) => this.click(e, review)}>Remove</button> <button className="helpful-button edit" onClick={(e) => this.click(e, review)}>Edit</button> <span className = "abuse-text">|  Report Abuse</span> </div>
             </div>
           ))}
         </ul>

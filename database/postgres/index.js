@@ -90,12 +90,26 @@ const createReview = async (productid, review) => {
   return data.rows[0];
 }
 
-const updateReview = () => {
-
+const updateReview = async (productid, review) => {
+  console.log('in db update review')
+  const task = await client.query(query = {
+    rowMode: 'array',
+    text: `UPDATE reviews SET title = $1 WHERE title = 'a';`,
+    values: ['the']
+  });
+  console.log('task: ', task);
+  return `Review ${review} successfully updated.`;
 }
 
-const deleteReview = () => {
-
+const deleteReview = async (productid, review) => {
+  console.log('in db delete review')
+  const task = await client.query(query = {
+    rowMode: 'array',
+    text: `DELETE FROM reviews WHERE id = $1;`,
+    values: [review]
+  });
+  console.log('task: ', task);
+  return `Review ${review} successfully deleted.`;
 }
 
 const seed = () => {
