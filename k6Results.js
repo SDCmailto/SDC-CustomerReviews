@@ -1,3 +1,4 @@
+//GET
 rate = 1
 Hannahs-MacBook-Pro:SDC-CustomerReviews hannahmanfredi$ k6 run k6script.js
 
@@ -149,3 +150,4 @@ constant_request_rate ✓ [=================================] 000/200 VUs  30s  
      iterations.....................: 556   12.803962/s
      vus............................: 200   min=200     max=200
      vus_max........................: 200   min=200     max=200
+//POST
