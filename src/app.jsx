@@ -11,8 +11,10 @@ class App extends React.Component {
       productId: window.location.pathname.split("/")[2] || "1",
       reviews: [],
       score: 0,
-      avgRating: 0
+      avgRating: 0,
+      totalNumberOfReviews: 40000000
     };
+    this.reviewsip = 'localhost';
     this.getAvgRating = this.getAvgRating.bind(this);
     this.setReviewsFeed = this.setReviewsFeed.bind(this);
     this.submit = this.submit.bind(this);
@@ -50,24 +52,31 @@ class App extends React.Component {
     });
   }
 
-  delete(id) {
-    $.ajax({
-      url: 'deletedReview/' + this.state.productId,
-      type: 'DELETE',
-      success: (data, res) => {
-        console.log('data: ', data);
-      }
+  delete(e, id) {
+    console.log(e, id)
+    e.preventDefault();
+    axios.delete('deletedReview/' + this.state.productId, {
+      body: id
     })
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((err) => {
+      throw err;
+    });
   }
 
-  edit(id) {
-    $.ajax({
-      url: 'editedReview/' + this.state.productId,
-      type: 'PUT',
-      success: (data, res) => {
-        console.log('data: ', data);
-      }
+  edit(e, reviewid) {
+    e.preventDefault();
+    axios.put('editedReview/' + this.state.productId, {
+      body: reviewid
     })
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((err) => {
+      throw err;
+    });
   }
 
   getAvgRating(id) {
