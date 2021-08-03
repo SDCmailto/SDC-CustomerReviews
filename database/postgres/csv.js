@@ -7,25 +7,6 @@ const generateCsvFiles = async () => {
   const users = utils.createUsers()
   const features = utils.createFeatures()
   const productFeaturesArray = utils.createProductFeaturesArray()
-  // const productFeaturesSets = utils.createSets()
-
-  // let count = 0;
-  // for (let set of productFeaturesSets) {
-  //   count ++
-  //   let ws_set = fs.createWriteStream(`set.csv`);
-  //   ws_set.write('productid,featureid\n', 'utf8');
-  //   fastcsv
-  //     .write(set)
-  //     .pipe(ws_set, {flags: 'a'})
-  // }
-
-  // let mainSet = 'mainSet.csv'
-  // while (count > 0) {
-  //   fs.appendFile(mainSet, `set.csv`, function (err) {
-  //     if (err) throw err;
-  //   });
-  //   count -= 1;
-  // }
 
   const ws_product = fs.createWriteStream("products.csv");
   await ws_product.write('avgRating,totalReviews,totalRatings\n', 'utf8');
@@ -64,13 +45,6 @@ const generateCsvFiles = async () => {
   fastcsv
     .write(productFeaturesArray)
     .pipe(ws_productFeaturesArray)
-
-  //   const ws_ProductFeaturesSet = await fs.createWriteStream('productFeaturesSet.csv');
-  // await  ws_ProductFeaturesSet .write('productid,featureid\n', 'utf8');
-  // await utils.createProductFeaturesSet(ws_ProductFeaturesSet , 'utf-8', () => {
-  //   ws_ProductFeaturesSet .end();
-  //   console.log('wrote 10 mill createProductFeaturesSet')
-  // });
 
 }
 

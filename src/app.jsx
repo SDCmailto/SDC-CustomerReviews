@@ -14,6 +14,7 @@ class App extends React.Component {
       avgRating: 0,
       totalNumberOfReviews: 40000000
     };
+    this.reviewsip = 'localhost';
     this.getAvgRating = this.getAvgRating.bind(this);
     this.setReviewsFeed = this.setReviewsFeed.bind(this);
     this.submit = this.submit.bind(this);

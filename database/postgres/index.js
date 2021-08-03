@@ -113,18 +113,23 @@ const deleteReview = async (productid, review) => {
 }
 
 const seed = () => {
+  console.log('inside seed')
 
-    const allSeedingQueries = [`COPY users(name_, userrating, totalreviews) FROM '/Users/hannahmanfredi/Desktop/SDC-CustomerReviews/users.csv' CSV HEADER`, `COPY features(name_) FROM '/Users/hannahmanfredi/Desktop/SDC-CustomerReviews/features.csv' CSV HEADER;`, `COPY products(avgRating, totalReviews, totalRatings) FROM '/Users/hannahmanfredi/Desktop/SDC-CustomerReviews/products.csv' CSV HEADER`, `COPY product_features_array(featureid) FROM '/Users/hannahmanfredi/Desktop/SDC-CustomerReviews/productFeaturesarray.csv' CSV HEADER`, `COPY productfeatures(productid, featureid) FROM '/Users/hannahmanfredi/Desktop/SDC-CustomerReviews/productFeatures.csv' CSV HEADER`, `COPY reviews(title, abuseReported, rating, location_, userid, productid, reviewDate, reviewBody, helpfulCount) FROM '/Users/hannahmanfredi/Desktop/SDC-CustomerReviews/reviews.csv' CSV HEADER`];
+  // const allSeedingQueries = [`COPY users(name_, userrating, totalreviews) FROM '/Users/hannahmanfredi/Desktop/SDC-CustomerReviews/users.csv' CSV HEADER`, `COPY features(name_) FROM '/Users/hannahmanfredi/Desktop/SDC-CustomerReviews/features.csv' CSV HEADER;`, `COPY products(avgRating, totalReviews, totalRatings) FROM '/Users/hannahmanfredi/Desktop/SDC-CustomerReviews/products.csv' CSV HEADER`, `COPY product_features_array(featureid) FROM '/Users/hannahmanfredi/Desktop/SDC-CustomerReviews/productFeaturesarray.csv' CSV HEADER`, `COPY productfeatures(productid, featureid) FROM '/Users/hannahmanfredi/Desktop/SDC-CustomerReviews/productFeatures.csv' CSV HEADER`, `COPY reviews(title, abuseReported, rating, location_, userid, productid, reviewDate, reviewBody, helpfulCount) FROM '/Users/hannahmanfredi/Desktop/SDC-CustomerReviews/reviews.csv' CSV HEADER`];
 
-      allSeedingQueries.forEach(query => {
-        client.query(query, (err, res) => {
-            if (err) throw err
-            console.log(res)
-            console.log('query: ', query)
-            })
-        seeded = true;
-        console.log('Postgres Seeding complete!')
-      });
+    const q = `COPY reviews(title, abuseReported, rating, location_, userid, productid, reviewDate, reviewBody, helpfulCount) FROM '/Users/hannahmanfredi/Desktop/SDC-CustomerReviews/reviews.csv' CSV HEADER`;
+
+      // allSeedingQueries.forEach(q => {
+        client.query(q, (err, res) => {
+          console.log('q: ', q)
+            if (err) {
+              throw err
+            } else {
+              console.log(res)
+              console.log('Postgres Seeding complete!')
+            }
+          });
+      // });
 
 }
 
@@ -144,9 +149,12 @@ const benchmark = () => {
 };
 
 // benchmark();
-
+module.exports.seed = seed;
 module.exports.findAllReviews = findAllReviews;
 module.exports.findAvgRating = findAvgRating;
 module.exports.createReview = createReview;
 module.exports.updateReview = updateReview;
 module.exports.deleteReview = deleteReview;
+
+module.exports.client = client;
+

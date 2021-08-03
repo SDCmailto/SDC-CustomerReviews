@@ -1,4 +1,5 @@
 const models = require('../models/index.js');
+const http = require('http');
 const parser = require('body-parser');
 
 module.exports = {
@@ -6,9 +7,14 @@ module.exports = {
     get: {
       allReviews: {
         handler: async (req, res) => {
+          console.log('in')
+          console.log('req: ', req)
           let productid = req.params.productid
+          console.log('productid: ', productid)
           const reviews = await models.reviews.findAllReviews(productid);
+          console.log('reviews: ', reviews);
           res.setHeader('content-type', 'application/json');
+          // res.setHeader('Access-Control-Allow-Origin:',  '*')
           if (!reviews.length) {
             res.status(500).send('ERROR, there are no existing reviews for this product')
           } else {
@@ -25,6 +31,7 @@ module.exports = {
           let review = req.body.body;
           const avgRating = await models.products.findAvgRating(productid)
           res.setHeader('content-type', 'application/json');
+          // res.setHeader('Access-Control-Allow-Origin:',  '*')
           if (!avgRating) {
             res.send('ERROR, this product has not yet been rated!')
           } else {
@@ -44,6 +51,7 @@ module.exports = {
         console.log('reviewid: ', reviewid)
         const updatedReview = await models.reviews.updateReview(productid, reviewid);
         res.setHeader('content-type', 'application/json');
+        // res.setHeader('Access-Control-Allow-Origin:',  '*')
         res.status(200).send('updated')
       },
       config: {
@@ -57,6 +65,7 @@ module.exports = {
         let reviewid = req.body.body;
         const deletedReview = await models.reviews.deleteReview(productid, reviewid);
         res.setHeader('content-type', 'application/json');
+        // res.setHeader('Access-Control-Allow-Origin:',  '*')
         res.status(200).send('deleted')
       },
       config: {

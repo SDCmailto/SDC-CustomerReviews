@@ -10,6 +10,7 @@ module.exports = {
   },
   reviews: {
     findAllReviews: async (productId) => {
+      console.log('invoked')
       const reviews = await db.findAllReviews(productId)
       return reviews[0];
     },
