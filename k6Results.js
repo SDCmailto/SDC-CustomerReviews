@@ -150,4 +150,61 @@ constant_request_rate ✓ [=================================] 000/200 VUs  30s  
      iterations.....................: 556   12.803962/s
      vus............................: 200   min=200     max=200
      vus_max........................: 200   min=200     max=200
+
 //POST
+Hannahs-MacBook-Pro:SDC-CustomerReviews hannahmanfredi$ k6 run k6script.js
+
+          /\      |‾‾| /‾‾/   /‾‾/
+     /\  /  \     |  |/  /   /  /
+    /  \/    \    |     (   /   ‾‾\
+   /          \   |  |\  \ |  (‾)  |
+  / __________ \  |__| \__\ \_____/ .io
+
+  execution: local
+     script: k6script.js
+     output: -
+
+  scenarios: (100.00%) 1 scenario, 200 max VUs, 1m0s max duration (incl. graceful stop):
+           * constant_request_rate: 1.00 iterations/s for 30s (maxVUs: 100-200, gracefulStop: 30s)
+
+
+running (0m30.0s), 000/100 VUs, 31 complete and 0 interrupted iterations
+constant_request_rate ✓ [==============================] 000/100 VUs  30s  1 iters/s
+
+     data_received..............: 14 kB   459 B/s
+     data_sent..................: 11 kB   351 B/s
+     http_req_blocked...........: avg=584.51µs min=247µs  med=304µs  max=6.35ms  p(90)=681µs  p(95)=1.24ms
+     http_req_connecting........: avg=348.22µs min=197µs  med=246µs  max=2.77ms  p(90)=434µs  p(95)=503.5µs
+     http_req_duration..........: avg=2.73ms   min=1.1ms  med=1.36ms max=38.35ms p(90)=2.42ms p(95)=2.99ms
+     http_req_failed............: 100.00% ✓ 31       ✗ 0
+     http_req_receiving.........: avg=71.06µs  min=43µs   med=52µs   max=497µs   p(90)=77µs   p(95)=88µs
+     http_req_sending...........: avg=158.74µs min=48µs   med=63µs   max=1.69ms  p(90)=142µs  p(95)=661.5µs
+     http_req_tls_handshaking...: avg=0s       min=0s     med=0s     max=0s      p(90)=0s     p(95)=0s
+     http_req_waiting...........: avg=2.5ms    min=874µs  med=1.19ms max=36.15ms p(90)=2.19ms p(95)=2.88ms
+     http_reqs..................: 31      1.033087/s
+     iteration_duration.........: avg=3.9ms    min=1.61ms med=1.99ms max=51.64ms p(90)=3.45ms p(95)=3.95ms
+     iterations.................: 31      1.033087/s
+     vus........................: 100     min=100    max=100
+     vus_max....................: 100     min=100    max=100
+     /\      |‾‾| /‾‾/   /‾‾/
+     /\  /  \     |  |/  /   /  /
+    /  \/    \    |     (   /   ‾‾\
+   /          \   |  |\  \ |  (‾)  |
+  / __________ \  |__| \__\ \_____/ .io
+
+  execution: local
+     script: k6script.js
+     output: -
+
+  scenarios: (100.00%) 1 scenario, 200 max VUs, 1m0s max duration (incl. graceful stop):
+           * constant_request_rate: 1.00 iterations/s for 30s (maxVUs: 100-200, gracefulStop: 30s)
+
+
+running (1m00.0s), 000/100 VUs, 0 complete and 30 interrupted iterations
+constant_request_rate ✓ [====================================] 030/100 VUs  30s  1 iters/s
+WARN[0060] No script iterations finished, consider making the test duration longer
+
+     data_received...: 0 B   0 B/s
+     data_sent.......: 11 kB 178 B/s
+     vus.............: 100   min=100 max=100
+     vus_max.........: 100   min=100 max=100

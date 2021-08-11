@@ -14,7 +14,6 @@ class App extends React.Component {
       avgRating: 0,
       totalNumberOfReviews: 40000000
     };
-    this.reviewsip = 'localhost';
     this.getAvgRating = this.getAvgRating.bind(this);
     this.setReviewsFeed = this.setReviewsFeed.bind(this);
     this.submit = this.submit.bind(this);
@@ -31,7 +30,7 @@ class App extends React.Component {
   componentDidMount() {
     $.ajax({
       method: 'GET',
-      url: 'reviews/' + this.state.productId,
+      url: 'http://52.14.110.72:3004/reviews/' + this.state.productId,
       success: (data, res) => {
         this.setReviewsFeed(data);
       }
@@ -39,11 +38,8 @@ class App extends React.Component {
   }
 
   submit(e, review) {
-    console.log('review: ', review)
     e.preventDefault();
-    axios.post('newReview/' + this.state.productId, {
-      body: review
-    })
+    axios.post('http://52.14.110.72:3004/newReview/' + this.state.productId, {review})
     .then((res) => {
       console.log(res);
     })
@@ -55,7 +51,7 @@ class App extends React.Component {
   delete(e, id) {
     console.log(e, id)
     e.preventDefault();
-    axios.delete('deletedReview/' + this.state.productId, {
+    axios.delete('http://52.14.110.72:3004/deletedReview/' + this.state.productId, {
       body: id
     })
     .then((res) => {
@@ -68,7 +64,7 @@ class App extends React.Component {
 
   edit(e, reviewid) {
     e.preventDefault();
-    axios.put('editedReview/' + this.state.productId, {
+    axios.put('http://52.14.110.72:3004/editedReview/' + this.state.productId, {
       body: reviewid
     })
     .then((res) => {
@@ -81,7 +77,7 @@ class App extends React.Component {
 
   getAvgRating(id) {
     $.ajax({
-      url: 'averagerating/' + id,
+      url: 'http://52.14.110.72:3004/averagerating/' + id,
       type: 'GET',
       success: (data, res) => {
         this.setState({

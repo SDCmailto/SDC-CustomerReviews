@@ -48,7 +48,8 @@ const findAvgRating = async (productid) => {
 }
 
 const createReview = async (productid, review) => {
-  let numbProductId = parseInt(review.productid)
+  console.log('review: ', review)
+  let numbProductId = parseInt(review.productid);
   const idQuery = {
     text: `SELECT COUNT (*) FROM reviews`,
   };
