@@ -10,6 +10,7 @@
     "test": "jest",
     "apitest": "mocha './tests/crudRoutes.js'",
     "build": "webpack",
+    "seed": "node ./database/postgres/seed.js",
     "create-db": "psql postgres < schema.sql",
     "writeToCsv": "node ./database/postgres/csv.js",
     "start": "node server/index.js",
