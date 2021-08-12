@@ -1,4 +1,5 @@
 const client = require('./index.js')
+const faker = require('faker');
 
 const seed = async () => {
 
