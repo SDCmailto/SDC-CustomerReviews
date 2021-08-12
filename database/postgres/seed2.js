@@ -3,7 +3,7 @@ const faker = require('faker');
 
 const seed = async () => {
 
-  for (let i = 0; i <= 250000; i++) {
+  for (let i = 0; i <= 500000; i++) {
     // let date = JSON.stringify(faker.date.past()).slice(1, 11) //YYYY-MM-DD
     // let review = {
     //     title: faker.lorem.words().replace(/,/g, ""),
