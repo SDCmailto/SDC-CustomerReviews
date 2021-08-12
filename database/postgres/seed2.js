@@ -39,7 +39,7 @@ const seed = async () => {
       helpfulCount: faker.datatype.number(2000)
     }
 
-    let q = `INSERT INTO reviews(title, abuseReported, rating, location_, userid, productid, reviewDate, reviewBody, helpfulCount) VALUES(${review.abuseReported}, ${review.rating}, ${review.location_}, ${review.productid}, ${review.reviewDate}, ${review.helpfulCount})`;
+    let q = `INSERT INTO reviews(abuseReported, rating, location_, productid, reviewDate, helpfulCount) VALUES(${review.abuseReported}, ${review.rating}, ${review.location_}, ${review.productid}, ${review.reviewDate}, ${review.helpfulCount})`;
 
     await client.client.query(q, (err, res) => {
         if (err) {
