@@ -4,22 +4,36 @@ const faker = require('faker');
 const seed = async () => {
 
   for (let i = 0; i <= 5; i++) {
-    let date = JSON.stringify(faker.date.past()).slice(1, 11) //YYYY-MM-DD
+    // let date = JSON.stringify(faker.date.past()).slice(1, 11) //YYYY-MM-DD
+    // let review = {
+    //     title: faker.lorem.words().replace(/,/g, ""),
+    //     abuseReported: faker.datatype.boolean(),
+    //     rating: faker.datatype.number(5),
+    //     location_: faker.address.country().replace(/,/g, ""),
+    //     userid: Math.floor((Math. random() * 1000000) + 1),
+    //     productid: Math.floor((Math. random() * 1000000) + 1),
+    //     reviewDate: date,
+    //     reviewBody: faker.lorem.paragraph().replace(/,/g, ""),
+    //     helpfulCount: faker.datatype.number(2000)
+    // }
     let review = {
-        title: faker.lorem.words().replace(/,/g, ""),
-        abuseReported: faker.datatype.boolean(),
-        rating: faker.datatype.number(5),
-        location_: faker.address.country().replace(/,/g, ""),
-        userid: Math.floor((Math. random() * 1000000) + 1),
-        productid: Math.floor((Math. random() * 1000000) + 1),
-        reviewDate: date,
-        reviewBody: faker.lorem.paragraph().replace(/,/g, ""),
-        helpfulCount: faker.datatype.number(2000)
+      // title: faker.lorem.words().replace(/,/g, ""),
+      // abuseReported: faker.datatype.boolean(),
+      // rating: faker.datatype.number(5),
+      // location_: faker.address.country().replace(/,/g, ""),
+      // userid: Math.floor((Math. random() * 1000000) + 1),
+      productid: Math.floor((Math. random() * 1000000) + 1),
+      // reviewDate: date,
+      // reviewBody: faker.lorem.paragraph().replace(/,/g, ""),
+      // helpfulCount: faker.datatype.number(2000)
     }
 
-    let q = `INSERT INTO reviews(title, abuseReported, rating, location_, userid, productid, reviewDate, reviewBody, helpfulCount) VALUES(${review.title}, ${review.abuseReported}, ${review.rating}, ${review.location_}, ${review.userid}, ${review.productid}, ${review.reviewDate}, ${review.reviewBody}, ${review.helpfulCount})`;
+    // let q = `INSERT INTO reviews(title, abuseReported, rating, location_, userid, productid, reviewDate, reviewBody, helpfulCount) VALUES(${review.title}, ${review.abuseReported}, ${review.rating}, ${review.location_}, ${review.userid}, ${review.productid}, ${review.reviewDate}, ${review.reviewBody}, ${review.helpfulCount})`;
+
+    let q = `INSERT INTO reviews(productid) VALUES (${review.productid})`;
 
     await client.client.query(q, (err, res) => {
+      console.log('q: ', q);
         if (err) {
           throw err
         } else {

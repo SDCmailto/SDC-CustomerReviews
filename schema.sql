@@ -27,17 +27,21 @@ CREATE TABLE IF NOT EXISTS Products (
 --  CONSTRAINT ProductFeatures_pkey PRIMARY KEY (productid, featureid)
 -- );
 DROP TABLE IF EXISTS Reviews CASCADE;
+-- CREATE TABLE IF NOT EXISTS Reviews (
+--  id SERIAL PRIMARY KEY,
+--  title TEXT,
+--  abuseReported BOOLEAN,
+--  rating INTEGER,
+--  location_ VARCHAR,
+--  userid INTEGER,
+--  productid INTEGER,
+--  reviewDate TIMESTAMP,
+--  reviewBody TEXT,
+--  helpfulCount INTEGER
+-- );
 CREATE TABLE IF NOT EXISTS Reviews (
  id SERIAL PRIMARY KEY,
- title TEXT,
- abuseReported BOOLEAN,
- rating INTEGER,
- location_ VARCHAR,
- userid INTEGER,
- productid INTEGER,
- reviewDate TIMESTAMP,
- reviewBody TEXT,
- helpfulCount INTEGER
+ productid INTEGER
 );
 
 -- DROP TABLE IF EXISTS Product_Features_Array CASCADE;
