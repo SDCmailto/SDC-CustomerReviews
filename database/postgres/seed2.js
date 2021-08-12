@@ -28,7 +28,7 @@ const seed = async () => {
   //     });
   // }
 
-  for (let i = 0; i <= 10000000; i++) {
+  for (let i = 0; i <= 1000000; i++) {
     let date = JSON.stringify(faker.date.past()).slice(1, 11) //YYYY-MM-DD
     let review = {
       title: faker.lorem.words().replace(/,/g, ""),
