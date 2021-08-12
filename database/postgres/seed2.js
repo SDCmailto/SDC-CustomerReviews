@@ -28,7 +28,7 @@ const seed = async () => {
   //     });
   // }
 
-  for (let i = 0; i <= 1000000; i++) {
+  for (let i = 0; i <= 5; i++) {
     let date = JSON.stringify(faker.date.past()).slice(1, 11) //YYYY-MM-DD
     let review = {
       title: faker.lorem.words().replace(/,/g, ""),
@@ -41,6 +41,7 @@ const seed = async () => {
       reviewBody: faker.lorem.paragraph().replace(/,/g, ""),
       helpfulCount: faker.datatype.number(2000)
     }
+
     let q = `INSERT INTO reviews(title, abuseReported, rating, location_, userid, productid, reviewDate, reviewBody, helpfulCount) VALUES(${review.title}, ${review.abuseReported}, ${review.rating}, ${review.location_}, ${review.userid}, ${review.productid}, ${review.reviewDate}, ${review.reviewBody}, ${review.helpfulCount})`;
 
     await client.client.query(q, (err, res) => {
