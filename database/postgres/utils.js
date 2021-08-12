@@ -20,6 +20,25 @@ module.exports = {
     }
     return products
   },
+  createReviews2: () => {
+    let reviews = [];
+    for (let i = 0; i <= 10000000; i++) {
+      let date = JSON.stringify(faker.date.past()).slice(1, 11) //YYYY-MM-DD
+      let review = {
+        title: faker.lorem.words().replace(/,/g, ""),
+        abuseReported: faker.datatype.boolean(),
+        rating: faker.datatype.number(5),
+        location_: faker.address.country().replace(/,/g, ""),
+        userid: Math.floor((Math. random() * 1000000) + 1),
+        productid: Math.floor((Math. random() * 1000000) + 1),
+        reviewDate: date,
+        reviewBody: faker.lorem.paragraph().replace(/,/g, ""),
+        helpfulCount: faker.datatype.number(2000)
+      }
+      reviews.push(review)
+    }
+    return reviews;
+  },
   createReviews: (writer, encoding, cb) => {
     let i = 0;
     function write() {
