@@ -29,13 +29,11 @@ CREATE TABLE IF NOT EXISTS Products (
 DROP TABLE IF EXISTS Reviews CASCADE;
 CREATE TABLE IF NOT EXISTS Reviews (
  id SERIAL PRIMARY KEY,
- title VARCHAR,
  abuseReported BOOLEAN,
  rating INTEGER,
  location_ VARCHAR,
  productid INTEGER,
  reviewDate TIMESTAMP,
- reviewBody VARCHAR,
  helpfulCount INTEGER
 );
 
