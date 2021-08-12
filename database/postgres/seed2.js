@@ -3,6 +3,38 @@ const faker = require('faker');
 
 const seed = async () => {
 
+  for (let i = 0; i <= 5; i++) {
+    let date = JSON.stringify(faker.date.past()).slice(1, 11) //YYYY-MM-DD
+    let review = {
+        title: faker.lorem.words().replace(/,/g, ""),
+        abuseReported: faker.datatype.boolean(),
+        rating: faker.datatype.number(5),
+        location_: faker.address.country().replace(/,/g, ""),
+        userid: Math.floor((Math. random() * 1000000) + 1),
+        productid: Math.floor((Math. random() * 1000000) + 1),
+        reviewDate: date,
+        reviewBody: faker.lorem.paragraph().replace(/,/g, ""),
+        helpfulCount: faker.datatype.number(2000)
+    }
+
+    let q = `INSERT INTO reviews(title, abuseReported, rating, location_, userid, productid, reviewDate, reviewBody, helpfulCount) VALUES(${review.title}, ${review.abuseReported}, ${review.rating}, ${review.location_}, ${review.userid}, ${review.productid}, ${review.reviewDate}, ${review.reviewBody}, ${review.helpfulCount})`;
+
+    await client.client.query(q, (err, res) => {
+        if (err) {
+          throw err
+        } else {
+          console.log(res)
+        }
+      });
+  }
+
+}
+
+seed()
+
+module.exports.seed = seed;
+
+
   // const min = 100;
   // for (let i = 0; i <= 100000; i++) {
   //   let totalReviews = faker.datatype.number(3000)
@@ -27,32 +59,3 @@ const seed = async () => {
   //       }
   //     });
   // }
-
-  for (let i = 0; i <= 5; i++) {
-    let date = JSON.stringify(faker.date.past()).slice(1, 11) //YYYY-MM-DD
-    let review = {
-      id: i,
-      abuseReported: faker.datatype.boolean(),
-      rating: faker.datatype.number(5),
-      location_: faker.address.country().replace(/,/g, ""),
-      productid: Math.floor((Math. random() * 1000000) + 1),
-      reviewDate: date,
-      helpfulCount: faker.datatype.number(2000)
-    }
-
-    let q = `INSERT INTO reviews(id, abuseReported, rating, location_, productid, reviewDate, helpfulCount) VALUES(${review.id}, ${review.abuseReported}, ${review.rating}, ${review.location_}, ${review.productid}, ${review.reviewDate}, ${review.helpfulCount})`;
-
-    await client.client.query(q, (err, res) => {
-        if (err) {
-          throw err
-        } else {
-          console.log(res)
-        }
-      });
-  }
-
-}
-
-seed()
-
-module.exports.seed = seed;
