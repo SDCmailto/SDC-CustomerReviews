@@ -4,7 +4,7 @@ const faker = require('faker');
 const seed = async () => {
 
   const min = 100;
-  for (let i = 0; i <= 50000; i++) {
+  for (let i = 0; i <= 100000; i++) {
     let totalReviews = faker.datatype.number(3000)
     let random = Math.floor(Math.random() * (totalReviews - min + 1) + min)
     let product = {
