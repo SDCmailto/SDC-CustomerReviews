@@ -22,6 +22,8 @@ const seed = async () => {
     await client.client.query(q, (err, res) => {
         if (err) {
           throw err
+        } else {
+          console.log(res)
         }
       });
   }
