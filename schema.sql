@@ -33,7 +33,6 @@ CREATE TABLE IF NOT EXISTS Reviews (
  abuseReported BOOLEAN,
  rating INTEGER,
  location_ VARCHAR,
- userid INTEGER,
  productid INTEGER,
  reviewDate TIMESTAMP,
  reviewBody VARCHAR,
