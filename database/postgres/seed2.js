@@ -6,17 +6,17 @@ const seed = () => {
   for (let i = 0; i <= 5; i++) {
     let date = JSON.stringify(faker.date.past()).slice(1, 11);
     let review = {
-      title: faker.lorem.words().replace(/,/g, ""),
+      title: faker.lorem.words().replace(/,/g, "").slice(0, 2),
       abuseReported: faker.datatype.boolean(),
       rating: faker.datatype.number(5),
-      location_: faker.address.country().replace(/,/g, ""),
+      location_: faker.address.country().replace(/,/g, "").slice(0, 2),
       productid: Math.floor((Math. random() * 1000000) + 1),
       reviewDate: date,
-      reviewBody: faker.lorem.paragraph().replace(/,/g, ""),
+      reviewBody: faker.lorem.paragraph().replace(/,/g, "").slice(0, 2),
       helpfulCount: faker.datatype.number(2000)
     }
 
-    let q = `INSERT INTO r(title, abuseReported, rating, location_, productid, reviewDate, reviewBody, helpfulCount) VALUES (${review.title}, ${review.abuseReported}, ${review.rating}, ${review.location_}, ${review.productid}, ${review.reviewDate}, ${review.reviewBody}, ${review.helpfulCount})`;
+    let q = `INSERT INTO r(title, abuseReported, rating, location_, productid, reviewDate, reviewBody, helpfulCount) VALUES(${review.title}, ${review.abuseReported}, ${review.rating}, ${review.location_}, ${review.productid}, ${review.reviewDate}, ${review.reviewBody}, ${review.helpfulCount})`;
 
     // let q = `INSERT INTO reviews(productid) VALUES (${review.productid})`;
 
