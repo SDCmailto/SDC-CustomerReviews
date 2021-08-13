@@ -6,28 +6,30 @@ const seed = () => {
   for (let i = 0; i <= 5; i++) {
     let date = JSON.stringify(faker.date.past()).slice(1, 11);
     let review = {
-      title: faker.lorem.words().replace(/,/g, "").slice(0, 2),
+      title: faker.lorem.words().replace(/,/g, ""),
       abuseReported: faker.datatype.boolean(),
       rating: faker.datatype.number(5),
-      location_: faker.address.country().replace(/,/g, "").slice(0, 2),
+      location_: faker.address.country().replace(/,/g, ""),
       productid: Math.floor((Math. random() * 1000000) + 1),
       reviewDate: date,
-      reviewBody: faker.lorem.paragraph().replace(/,/g, "").slice(0, 2),
+      reviewBody: faker.lorem.paragraph().replace(/,/g, ""),
       helpfulCount: faker.datatype.number(2000)
     }
 
   //(title, abuseReported, rating, location_, productid, reviewDate, reviewBody, helpfulCount)
-
-    let q = `INSERT INTO r VALUES(${review.title}, ${review.abuseReported}, ${review.rating}, ${review.location_}, ${review.productid}, ${review.reviewDate}, ${review.reviewBody}, ${review.helpfulCount})`;
-
+    // let q = 'INSERT INTO r VALUES(review.title, review.abuseReported, review.rating, review.location_, review.productid, review.reviewDate, review.reviewBody, review.helpfulCount)';
     // let q = `INSERT INTO reviews(productid) VALUES (${review.productid})`;
 
-    client.client.query(q, (err, res) => {
-      console.log('q: ', q);
+    let text = 'INSERT INTO r(title, abuseReported, rating, location_, productid, reviewDate, reviewBody, helpfulCount) VALUES($1, $2, $3, $4, $5, $6, $7, $8)';
+
+    let values = [review.title, review.abuseReported, review.rating, review.location_, review.productid, review.reviewDate, review.reviewBody, review.helpfulCount];
+
+    client.client.query(text, values, (err, res) => {
         if (err) {
           throw err
+          console.log(err.stack)
         } else {
-          console.log(res)
+          console.log(res.rows[0])
         }
       });
   }
