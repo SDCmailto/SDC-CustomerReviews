@@ -32,7 +32,7 @@ const seed = () => {
 
     let q = `INSERT INTO reviews(productid) VALUES (${review.productid})`;
 
-    await client.client.query(q, (err, res) => {
+    client.client.query(q, (err, res) => {
       console.log('q: ', q);
         if (err) {
           throw err
