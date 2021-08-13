@@ -7,6 +7,7 @@ module.exports = {
     get: {
       allReviews: {
         handler: async (req, res) => {
+          console.log('in: ', in)
           let productid = req.params.productid
           const reviews = await models.reviews.findAllReviews(productid);
           console.log('reviews: ', reviews);
