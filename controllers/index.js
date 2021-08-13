@@ -7,14 +7,10 @@ module.exports = {
     get: {
       allReviews: {
         handler: async (req, res) => {
-          console.log('in')
-          console.log('req: ', req)
           let productid = req.params.productid
-          console.log('productid: ', productid)
           const reviews = await models.reviews.findAllReviews(productid);
           console.log('reviews: ', reviews);
           res.setHeader('content-type', 'application/json');
-          // res.setHeader('Access-Control-Allow-Origin:',  '*')
           if (!reviews.length) {
             res.status(500).send('ERROR, there are no existing reviews for this product')
           } else {

@@ -17,7 +17,7 @@ client
 
 const findAllReviews = async (productId) => {
   const query = {
-    text: `SELECT * FROM reviews JOIN users ON (reviews.userid = users.id) WHERE productid = $1`,
+    text: `SELECT * FROM reviews JOIN products ON (reviews.productid = products.id) WHERE productid = $1`,
     values: [productId]
   };
   let data = [];

@@ -30,7 +30,7 @@ class App extends React.Component {
   componentDidMount() {
     $.ajax({
       method: 'GET',
-      url: 'http://3.22.168.40:3004/reviews/' + this.state.productId,
+      url: 'http://3.16.203.185:3004/reviews/' + this.state.productId,
       success: (data, res) => {
         this.setReviewsFeed(data);
       }
@@ -39,7 +39,7 @@ class App extends React.Component {
 
   submit(e, review) {
     e.preventDefault();
-    axios.post('http://3.22.168.40:3004/newReview/' + this.state.productId, {review})
+    axios.post('http://3.16.203.185:3004/newReview/' + this.state.productId, {review})
     .then((res) => {
       console.log(res);
     })
@@ -51,7 +51,7 @@ class App extends React.Component {
   delete(e, id) {
     console.log(e, id)
     e.preventDefault();
-    axios.delete('http://3.22.168.40:3004/deletedReview/' + this.state.productId, {
+    axios.delete('http://3.16.203.185:3004/deletedReview/' + this.state.productId, {
       body: id
     })
     .then((res) => {
@@ -64,7 +64,7 @@ class App extends React.Component {
 
   edit(e, reviewid) {
     e.preventDefault();
-    axios.put('http://3.22.168.40:3004/editedReview/' + this.state.productId, {
+    axios.put('http://3.16.203.185:3004/editedReview/' + this.state.productId, {
       body: reviewid
     })
     .then((res) => {
@@ -77,7 +77,7 @@ class App extends React.Component {
 
   getAvgRating(id) {
     $.ajax({
-      url: 'http://3.22.168.40:3004/averagerating/' + id,
+      url: 'http://3.16.203.185:3004/averagerating/' + id,
       type: 'GET',
       success: (data, res) => {
         this.setState({
