@@ -1,7 +1,7 @@
 const client = require('./index.js')
 const faker = require('faker');
 
-const seed = async () => {
+const seed = () => {
 
   for (let i = 0; i <= 5; i++) {
     let date = JSON.stringify(faker.date.past()).slice(1, 11);
