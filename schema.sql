@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS R (
  rating INTEGER,
  userid INTEGER,
  productid INTEGER,
- reviewDate TIMESTAMP,
+ reviewDate INTEGER,
  helpfulCount INTEGER
 );
 -- CREATE TABLE IF NOT EXISTS Reviews (
