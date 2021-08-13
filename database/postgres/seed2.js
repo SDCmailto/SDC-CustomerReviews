@@ -22,7 +22,7 @@ const seed = async () => {
       // rating: faker.datatype.number(5),
       // location_: faker.address.country().replace(/,/g, ""),
       // userid: Math.floor((Math. random() * 1000000) + 1),
-      productid: Math.floor((Math. random() * 1000000) + 1),
+      productid: Math.floor((Math. random() * 10) + 0),
       // reviewDate: date,
       // reviewBody: faker.lorem.paragraph().replace(/,/g, ""),
       // helpfulCount: faker.datatype.number(2000)
