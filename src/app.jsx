@@ -49,7 +49,6 @@ class App extends React.Component {
   }
 
   delete(e, id) {
-    console.log(e, id)
     e.preventDefault();
     axios.delete('http://3.16.203.185:3004/deletedReview/' + this.state.productId, {
       body: id
