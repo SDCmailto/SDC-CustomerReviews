@@ -9,7 +9,7 @@ const seed = () => {
         title: faker.lorem.words().replace(/,/g, "").slice(0, 2),
         abuseReported: faker.datatype.boolean(),
         rating: faker.datatype.number(5),
-        location_: faker.address.country().replace(/,/g, ""),
+        location_: faker.address.country().replace(/,/g, "").slice(0, 2),
         userid: Math.floor((Math. random() * 1000000) + 1),
         productid: Math.floor((Math. random() * 1000000) + 1),
         reviewDate: date,
