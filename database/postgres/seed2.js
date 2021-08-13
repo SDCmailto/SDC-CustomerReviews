@@ -3,7 +3,7 @@ const faker = require('faker');
 
 const seed = () => {
 
-  for (let i = 0; i <= 500000; i++) {
+  for (let i = 0; i <= 100; i++) {
     let date = JSON.stringify(faker.date.past()).slice(1, 11);
     let review = {
         // abuseReported: faker.datatype.boolean(),
