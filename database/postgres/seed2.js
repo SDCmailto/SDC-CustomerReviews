@@ -6,14 +6,14 @@ const seed = () => {
   for (let i = 0; i <= 5; i++) {
     let date = JSON.stringify(faker.date.past()).slice(1, 11);
     let review = {
-        title: faker.lorem.words().replace(/,/g, ""),
+        title: faker.lorem.words().replace(/,/g, "").slice(0, 2),
         abuseReported: faker.datatype.boolean(),
         rating: faker.datatype.number(5),
         location_: faker.address.country().replace(/,/g, ""),
         userid: Math.floor((Math. random() * 1000000) + 1),
         productid: Math.floor((Math. random() * 1000000) + 1),
         reviewDate: date,
-        reviewBody: faker.lorem.paragraph().replace(/,/g, ""),
+        reviewBody: faker.lorem.paragraph().replace(/,/g, "").slice(0, 2),
         helpfulCount: faker.datatype.number(2000)
     }
     // let review = {
@@ -21,7 +21,7 @@ const seed = () => {
       // abuseReported: faker.datatype.boolean(),
       // rating: faker.datatype.number(5),
       // location_: faker.address.country().replace(/,/g, ""),
-      // userid: Math.floor((Math. random() * 1000000) + 1),
+      // userid: Math.floor((Math. random() * 1000000) + 1),psql -U postgres
       // productid: Math.floor((Math. random() * 1000000) + 1),
       // reviewDate: date,
       // reviewBody: faker.lorem.paragraph().replace(/,/g, ""),
