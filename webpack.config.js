@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-  entry: './src/Index.jsx',
+  entry: './src/index.jsx',
   mode: 'development',
   watch: true,
   output: {
