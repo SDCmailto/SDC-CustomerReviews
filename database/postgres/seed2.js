@@ -3,31 +3,22 @@ const faker = require('faker');
 
 const seed = () => {
 
-  for (let i = 0; i <= 100; i++) {
+  for (let i = 0; i <= 5; i++) {
     let date = JSON.stringify(faker.date.past()).slice(1, 11);
     let review = {
-        // abuseReported: faker.datatype.boolean(),
-        // rating: faker.datatype.number(5),
-        // userid: Math.floor((Math. random() * 1000000) + 1),
-        productid: Math.floor((Math. random() * 1000000) + 1),
-        // reviewDate: date,
-        // helpfulCount: faker.datatype.number(2000)
+      title: faker.lorem.words().replace(/,/g, ""),
+      abuseReported: faker.datatype.boolean(),
+      rating: faker.datatype.number(5),
+      location_: faker.address.country().replace(/,/g, ""),
+      productid: Math.floor((Math. random() * 1000000) + 1),
+      reviewDate: date,
+      reviewBody: faker.lorem.paragraph().replace(/,/g, ""),
+      helpfulCount: faker.datatype.number(2000)
     }
-    // let review = {
-      // title: faker.lorem.words().replace(/,/g, ""),
-      // abuseReported: faker.datatype.boolean(),
-      // rating: faker.datatype.number(5),
-      // location_: faker.address.country().replace(/,/g, ""),
-      // userid: Math.floor((Math. random() * 1000000) + 1),psql -U postgres
-      // productid: Math.floor((Math. random() * 1000000) + 1),
-      // reviewDate: date,
-      // reviewBody: faker.lorem.paragraph().replace(/,/g, ""),
-      // helpfulCount: faker.datatype.number(2000)
-    // }
 
-    // let q = `INSERT INTO r(abuseReported, rating, userid, productid, reviewDate, helpfulCount) VALUES(${review.abuseReported}, ${review.rating}, ${review.userid}, ${review.productid}, ${review.reviewDate}, ${review.helpfulCount})`;
+    let q = `INSERT INTO r(title, abuseReported, rating, location_, productid, reviewDate, reviewBody, helpfulCount) VALUES (${review.title}, ${review.abuseReported}, ${review.rating}, ${review.location_}, ${review.productid}, ${review.reviewDate}, ${review.reviewBody}, ${review.helpfulCount})`;
 
-    let q = `INSERT INTO reviews(productid) VALUES (${review.productid})`;
+    // let q = `INSERT INTO reviews(productid) VALUES (${review.productid})`;
 
     client.client.query(q, (err, res) => {
       console.log('q: ', q);
