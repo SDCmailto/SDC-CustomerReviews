@@ -29,7 +29,7 @@ const seed = () => {
       // helpfulCount: faker.datatype.number(2000)
     // }
 
-    let q = `INSERT INTO r(title, abuseReported, rating, location_, userid, productid, reviewDate, reviewBody, helpfulCount) VALUES(${review.title}, ${review.abuseReported}, ${review.rating}, ${review.location_}, ${review.userid}, ${review.productid}, ${review.reviewDate}, ${review.reviewBody}, ${review.helpfulCount})`;
+    let q = `INSERT INTO r(id, title, abuseReported, rating, location_, userid, productid, reviewDate, reviewBody, helpfulCount) VALUES(${review.id}, ${review.title}, ${review.abuseReported}, ${review.rating}, ${review.location_}, ${review.userid}, ${review.productid}, ${review.reviewDate}, ${review.reviewBody}, ${review.helpfulCount})`;
 
     // let q = `INSERT INTO reviews(productid) VALUES (${review.productid})`;
 
