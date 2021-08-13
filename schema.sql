@@ -28,14 +28,12 @@ CREATE TABLE IF NOT EXISTS Products (
 -- );
 DROP TABLE IF EXISTS R CASCADE;
 CREATE TABLE IF NOT EXISTS R (
- id INTEGER PRIMARY KEY,
+ id SERIAL PRIMARY KEY,
  abuseReported BOOLEAN,
  rating INTEGER,
- location_ VARCHAR,
  userid INTEGER,
  productid INTEGER,
  reviewDate TIMESTAMP,
- reviewBody TEXT,
  helpfulCount INTEGER
 );
 -- CREATE TABLE IF NOT EXISTS Reviews (
