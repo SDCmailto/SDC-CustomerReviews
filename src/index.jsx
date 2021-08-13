@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App.jsx';
+import App from './app.jsx';
 
 ReactDOM.render(<App />, document.getElementById("reviews"))
 //calls render on component and inserts html into target div
