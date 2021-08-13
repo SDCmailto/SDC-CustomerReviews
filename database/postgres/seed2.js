@@ -6,6 +6,7 @@ const seed = () => {
   for (let i = 0; i <= 5; i++) {
     let date = JSON.stringify(faker.date.past()).slice(1, 11);
     let review = {
+        id: i,
         title: faker.lorem.words().replace(/,/g, "").slice(0, 2),
         abuseReported: faker.datatype.boolean(),
         rating: faker.datatype.number(5),
