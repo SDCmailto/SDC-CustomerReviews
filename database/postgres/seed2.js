@@ -3,8 +3,10 @@ const faker = require('faker');
 
 const seed = () => {
 
-  for (let i = 0; i <= 5; i++) {
+  for (let i = 0; i <= 100000; i++) {
+
     let date = JSON.stringify(faker.date.past()).slice(1, 11);
+
     let review = {
       title: faker.lorem.words().replace(/,/g, ""),
       abuseReported: faker.datatype.boolean(),
@@ -16,10 +18,6 @@ const seed = () => {
       helpfulCount: faker.datatype.number(2000)
     }
 
-  //(title, abuseReported, rating, location_, productid, reviewDate, reviewBody, helpfulCount)
-    // let q = 'INSERT INTO r VALUES(review.title, review.abuseReported, review.rating, review.location_, review.productid, review.reviewDate, review.reviewBody, review.helpfulCount)';
-    // let q = `INSERT INTO reviews(productid) VALUES (${review.productid})`;
-
     let text = 'INSERT INTO reviews(title, abuseReported, rating, location_, productid, reviewDate, reviewBody, helpfulCount) VALUES($1, $2, $3, $4, $5, $6, $7, $8)';
 
     let values = [review.title, review.abuseReported, review.rating, review.location_, review.productid, review.reviewDate, review.reviewBody, review.helpfulCount];
@@ -29,7 +27,7 @@ const seed = () => {
           throw err
           console.log(err.stack)
         } else {
-          console.log(res.rows[0])
+          console.log('res: ', res);
         }
       });
   }
@@ -40,7 +38,7 @@ seed()
 
 module.exports.seed = seed;
 
-
+//seed products
   // const min = 100;
   // for (let i = 0; i <= 100000; i++) {
   //   let totalReviews = faker.datatype.number(3000)

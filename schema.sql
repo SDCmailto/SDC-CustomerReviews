@@ -26,8 +26,8 @@ CREATE TABLE IF NOT EXISTS Products (
 --  featureid int REFERENCES features(id) ON UPDATE CASCADE,
 --  CONSTRAINT ProductFeatures_pkey PRIMARY KEY (productid, featureid)
 -- );
-DROP TABLE IF EXISTS R CASCADE;
-CREATE TABLE IF NOT EXISTS R (
+DROP TABLE IF EXISTS Reviews CASCADE;
+CREATE TABLE IF NOT EXISTS Reviews (
  id SERIAL PRIMARY KEY,
  title TEXT,
  abuseReported BOOLEAN,
@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS R (
  location_ TEXT,
  productid INTEGER,
  reviewDate TIMESTAMP,
- reviewBody: TEXT,
+ reviewBody TEXT,
  helpfulCount INTEGER
 );
 -- CREATE TABLE IF NOT EXISTS Reviews (
