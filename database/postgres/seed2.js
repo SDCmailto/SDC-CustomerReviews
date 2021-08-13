@@ -20,7 +20,7 @@ const seed = () => {
     // let q = 'INSERT INTO r VALUES(review.title, review.abuseReported, review.rating, review.location_, review.productid, review.reviewDate, review.reviewBody, review.helpfulCount)';
     // let q = `INSERT INTO reviews(productid) VALUES (${review.productid})`;
 
-    let text = 'INSERT INTO r(title, abuseReported, rating, location_, productid, reviewDate, reviewBody, helpfulCount) VALUES($1, $2, $3, $4, $5, $6, $7, $8)';
+    let text = 'INSERT INTO reviews(title, abuseReported, rating, location_, productid, reviewDate, reviewBody, helpfulCount) VALUES($1, $2, $3, $4, $5, $6, $7, $8)';
 
     let values = [review.title, review.abuseReported, review.rating, review.location_, review.productid, review.reviewDate, review.reviewBody, review.helpfulCount];
 
