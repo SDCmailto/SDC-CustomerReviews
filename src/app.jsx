@@ -30,7 +30,7 @@ class App extends React.Component {
   componentDidMount() {
     $.ajax({
       method: 'GET',
-      url: 'http://18.223.43.253:3001/reviews/' + this.state.productId,
+      url: 'http://3.16.203.185:3004/reviews/' + this.state.productId,
       success: (data, res) => {
         this.setReviewsFeed(data);
       }
