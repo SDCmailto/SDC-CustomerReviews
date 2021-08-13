@@ -6,12 +6,12 @@ const seed = () => {
   for (let i = 0; i <= 500000; i++) {
     let date = JSON.stringify(faker.date.past()).slice(1, 11);
     let review = {
-        abuseReported: faker.datatype.boolean(),
-        rating: faker.datatype.number(5),
-        userid: Math.floor((Math. random() * 1000000) + 1),
+        // abuseReported: faker.datatype.boolean(),
+        // rating: faker.datatype.number(5),
+        // userid: Math.floor((Math. random() * 1000000) + 1),
         productid: Math.floor((Math. random() * 1000000) + 1),
-        reviewDate: date,
-        helpfulCount: faker.datatype.number(2000)
+        // reviewDate: date,
+        // helpfulCount: faker.datatype.number(2000)
     }
     // let review = {
       // title: faker.lorem.words().replace(/,/g, ""),
@@ -25,9 +25,9 @@ const seed = () => {
       // helpfulCount: faker.datatype.number(2000)
     // }
 
-    let q = `INSERT INTO r(abuseReported, rating, userid, productid, reviewDate, helpfulCount) VALUES(${review.abuseReported}, ${review.rating}, ${review.userid}, ${review.productid}, ${review.reviewDate}, ${review.helpfulCount})`;
+    // let q = `INSERT INTO r(abuseReported, rating, userid, productid, reviewDate, helpfulCount) VALUES(${review.abuseReported}, ${review.rating}, ${review.userid}, ${review.productid}, ${review.reviewDate}, ${review.helpfulCount})`;
 
-    // let q = `INSERT INTO reviews(productid) VALUES (${review.productid})`;
+    let q = `INSERT INTO reviews(productid) VALUES (${review.productid})`;
 
     client.client.query(q, (err, res) => {
       console.log('q: ', q);
