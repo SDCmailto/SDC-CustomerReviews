@@ -12,12 +12,13 @@ const seed = () => {
       abuseReported: faker.datatype.boolean(),
       rating: faker.datatype.number(5),
       location_: faker.address.country().replace(/,/g, ""),
-      productid: Math.floor((Math. random() * 1000000) + 1),
+      productid: 1,
       reviewDate: date,
       reviewBody: faker.lorem.paragraph().replace(/,/g, ""),
       helpfulCount: faker.datatype.number(2000)
     }
 
+    //Math.floor((Math. random() * 1000000) + 1)
     let text = 'INSERT INTO reviews(title, abuseReported, rating, location_, productid, reviewDate, reviewBody, helpfulCount) VALUES($1, $2, $3, $4, $5, $6, $7, $8)';
 
     let values = [review.title, review.abuseReported, review.rating, review.location_, review.productid, review.reviewDate, review.reviewBody, review.helpfulCount];

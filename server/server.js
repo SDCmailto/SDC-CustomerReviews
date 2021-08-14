@@ -1,3 +1,4 @@
+const compression = require('compression')
 const express = require('express')
 const parser = require('body-parser');
 const path = require('path')
@@ -8,6 +9,7 @@ const models = require('../models/index.js');
 
 const app = express()
 
+app.use(compression());
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
   next();
